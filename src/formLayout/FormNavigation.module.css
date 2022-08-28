@@ -1,0 +1,31 @@
+.header {
+    width: 100%;
+    height: auto;
+}
+
+
+.header ul{
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  flex-direction: row;
+
+}
+
+header li {
+    margin: 1rem 1rem
+}
+
+.header a {
+  text-decoration: none;
+  color: black;
+  font-size: 1 rem;
+}
+
+.header a:hover,
+.header a:active,
+.header a.active {
+  border-bottom: black solid 2px;
+
+}
