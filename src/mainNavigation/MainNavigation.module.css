@@ -1,0 +1,45 @@
+.header {
+  margin: 3rem auto;
+  text-align: center;
+  align-items: center;
+  font-size: 1.3rem;
+}
+.logoimg {
+  margin: 3rem auto;
+  align-items: center;
+  text-align: center;
+}
+
+.logoimg img {
+  align-items: center;
+  text-align: center;
+}
+
+.nav {
+  margin: 3rem auto;
+  align-items: center;
+  text-align: center;
+}
+
+.nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav li {
+  margin-left: 1.5rem;
+  font-size: 1.25rem;
+  font-size: 120%;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.6rem;
+}
+
+.nav a:hover,
+.nav a:active,
+.nav a.active {
+  color: #e6fcfc;
+}
