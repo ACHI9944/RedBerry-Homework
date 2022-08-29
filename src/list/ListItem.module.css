@@ -1,0 +1,65 @@
+.layer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ffffff;
+}
+.maindiv {
+  width: 60%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.middlediv {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-left: 0;
+  
+}
+
+.underline {
+  border-bottom: black solid 1px;
+  padding-bottom: 30px;
+}
+
+.littlediv {
+  display: flex;
+  justify-content: space-between;
+  flex: row;
+  width: 330px;
+}
+
+.layer img {
+  max-width: 280px;
+  height: auto;
+}
+
+.layer Button {
+  padding: 0;
+  margin: 0;
+  width: 0;
+  height: 0;
+}
+
+.query {
+  width: 140px;
+}
+
+.description {
+  width: 140px;
+}
+
+.query p {
+  font-size: 0.65rem;
+  font-weight: bold;
+}
+
+.description p {
+  font-size: 0.65rem;
+  color: #797979;
+}

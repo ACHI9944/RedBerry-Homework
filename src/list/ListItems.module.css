@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #EAFAFF;
+  background-color: #eafaff;
   border-radius: 20px;
   width: 350px;
   height: 128px;
@@ -13,7 +13,6 @@
 .listItem img {
   width: 100px;
   height: auto;
-  
 }
 
 .image {
@@ -21,15 +20,18 @@
   justify-content: l;
 }
 
-
-
-.description p {
-    font-size: 0.7rem;
-    margin: 0.5rem;
-    background-color: #EAFAFF;
+.names {
+  font-size: 0.8rem;
+  margin: 0.5rem;
+  background-color: #eafaff;
 }
 
 .button {
+  font-size: 0.7rem;
+  margin: 0.5rem;
+  background-color: #eafaff;
+  font-size: 0.7rem;
   cursor: pointer;
-  color:  #4386A9;
+  color: #4386a9;
+  text-decoration-line: underline;
 }
