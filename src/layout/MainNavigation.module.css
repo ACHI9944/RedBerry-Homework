@@ -1,11 +1,24 @@
+.main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ffffff;
+  height: 100vh;
+  object-fit: cover;
+}
+
 .header {
-  margin: 3rem auto;
+  margin: 0rem auto 3rem auto;
   text-align: center;
   align-items: center;
   font-size: 1.3rem;
 }
+.header img {
+  width: 112px;
+  height: auto;
+}
 .logoimg {
-  margin: 3rem auto;
+  margin: 0rem auto 3rem auto;
   align-items: center;
   text-align: center;
 }
@@ -13,6 +26,7 @@
 .logoimg img {
   align-items: center;
   text-align: center;
+  border: none;
 }
 
 .nav {
@@ -25,17 +39,21 @@
   list-style: none;
   padding: 0;
 }
-
 .nav li {
-  margin-left: 1.5rem;
-  font-size: 1.25rem;
-  font-size: 120%;
+  margin: 1rem auto;
+  width: 15rem;
+  background-color: #62a1eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
 }
 
 .nav a {
-  text-decoration: none;
-  color: black;
-  font-size: 1.6rem;
+  margin: 1rem auto;
+  color: white;
+  font-size: 85%;
+  font-weight: lighter;
 }
 
 .nav a:hover,

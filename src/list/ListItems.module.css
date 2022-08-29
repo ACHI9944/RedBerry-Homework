@@ -1,0 +1,35 @@
+.listItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #EAFAFF;
+  border-radius: 20px;
+  width: 350px;
+  height: 128px;
+  margin: 1rem;
+}
+
+.listItem img {
+  width: 100px;
+  height: auto;
+  
+}
+
+.image {
+  display: flex;
+  justify-content: l;
+}
+
+
+
+.description p {
+    font-size: 0.7rem;
+    margin: 0.5rem;
+    background-color: #EAFAFF;
+}
+
+.button {
+  cursor: pointer;
+  color:  #4386A9;
+}

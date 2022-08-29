@@ -1,18 +1,16 @@
-import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import logo from "../pictures/redbrr.PNG";
+import redberry from "../pictures/redberylogo.png";
 
 const MainNavigation = () => {
   return (
-    <Fragment>
+    <main className={classes.main}>
       <header className={classes.header}>
-        <p>RedBerry</p>
+        <img src={redberry} alt="logo"></img>
       </header>
 
-      <div className={classes.logoimg}>
-        <img src={logo} alt="logo"></img>
-      </div>
+      <img src={logo} alt="logo"></img>
 
       <nav className={classes.nav}>
         <ul>
@@ -34,7 +32,7 @@ const MainNavigation = () => {
           </li>
         </ul>
       </nav>
-    </Fragment>
+    </main>
   );
 };
 

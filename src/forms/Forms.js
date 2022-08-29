@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import FormLayout from "../formLayout/FormLayout";
 
 import LaptopForm from "./LaptopForm";
@@ -8,6 +8,7 @@ const Forms = () => {
   return (
     <FormLayout>
       <Routes>
+        <Route path="/" element={<Navigate to="personform" />} />
         <Route path="personform" element={<PersonForm />} />
         <Route path="laptopForm" element={<LaptopForm />} />
       </Routes>

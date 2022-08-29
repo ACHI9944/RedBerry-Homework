@@ -1,31 +1,30 @@
 .header {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
-
-.header ul{
+.header ul {
   list-style: none;
   width: 100%;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: row;
-
 }
 
 header li {
-    margin: 1rem 1rem
+  margin: 1rem 1rem 0rem 1rem;
 }
 
 .header a {
   text-decoration: none;
   color: black;
-  font-size: 1 rem;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .header a:hover,
 .header a:active,
 .header a.active {
   border-bottom: black solid 2px;
-
+  padding-bottom: 5px;
 }
