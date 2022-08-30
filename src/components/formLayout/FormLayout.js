@@ -1,6 +1,7 @@
-import FormNavigation from "./FormNavigation";
+
 import classes from "./FormLayout.module.css";
-import logo from "../pictures/5bdb2fe4dde9ecbf66f88a7fe003af97.png";
+import logo from "../../assets/pictures/5bdb2fe4dde9ecbf66f88a7fe003af97.png";
+import FormNavigation from "./FormNavigation";
 
 const FormLayout = (props) => {
   return (

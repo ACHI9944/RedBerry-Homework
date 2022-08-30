@@ -1,4 +1,4 @@
-import classes from './TeamAndPosition.module.css'
+
 import { Fragment } from "react";
 
 const PositionOption = (props) => {
@@ -7,7 +7,7 @@ const PositionOption = (props) => {
       <option value="პოზიცია" disabled hidden>
         პოზიცია
       </option>
-      <option value={props.value} className={classes.option}>{props.value}</option>;
+      <option value={props.value}>{props.value}</option>;
     </Fragment>
   );
 };

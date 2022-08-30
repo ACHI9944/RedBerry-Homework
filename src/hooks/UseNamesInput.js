@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
+import classes from './UseNamesInput.module.css'
 
 //Default functions for checking input validity
 const isMoreThanTwoLetters = (value) => value.trim().length > 2;
@@ -52,7 +53,7 @@ const inputStateReducer = (state, action) => {
   return initialInputState;
 };
 
-const UseInput = () => {
+const UseNamesInput = () => {
   const [inputState, dispatch] = useReducer(
     inputStateReducer,
     initialInputState
@@ -85,6 +86,7 @@ const UseInput = () => {
     }
     return { valueComment, valueHasError };
   };
+
   //destructuring checker function
   const { valueComment, valueHasError } = checker(inputState);
 
@@ -99,6 +101,11 @@ const UseInput = () => {
     };
   }, [valueHasError]);
 
+  //query for dynamic classes
+  const valueClasses = inputHasError
+  ? classes.invalidnames
+  : classes.names;
+
   return {
     value: inputState.value,
     comment: valueComment,
@@ -106,7 +113,8 @@ const UseInput = () => {
     valueChangeHandler,
     inputBlurHandler,
     reset,
+    valueClasses
   };
 };
 
-export default UseInput;
+export default UseNamesInput;

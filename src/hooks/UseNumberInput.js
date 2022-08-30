@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
+import classes from "./UseNumberInput.module.css";
 
 //Default functions for checking input validity
 
@@ -81,6 +82,7 @@ const UseNumberInput = () => {
 
   //using useEffect to avoid unnecessary rerenderings while typing
   const [inputHasError, setInputHasError] = useState(false);
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       setInputHasError(valueHasError);
@@ -90,13 +92,18 @@ const UseNumberInput = () => {
     };
   }, [valueHasError]);
 
+  //query for dynamic classes
+
+  const numberClasses = inputHasError ? classes.invalidNumber : classes.number;
+
+
   return {
     value: inputState.value,
     comment: valueComment,
-    hasError: inputHasError,
     valueChangeHandler,
     inputBlurHandler,
     reset,
+    numberClasses,
   };
 };
 

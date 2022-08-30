@@ -1,6 +1,6 @@
 import classes from "./ListItem.module.css";
 import { useNavigate } from "react-router-dom";
-import laptopimage from "../pictures/laptop3.png";
+import laptopimage from "../assets/pictures/laptop3.png";
 
 const ListItem = () => {
   const navigate = useNavigate();

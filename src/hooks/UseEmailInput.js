@@ -1,4 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
+import classes from './UseEmailInput.module.css'
 
 //Default functions for checking input validity
 
@@ -86,13 +87,16 @@ const UseEmailInput = () => {
       clearTimeout(identifier);
     };
   }, [valueHasError]);
+//query for dynamic classes
+  const emailClasses = inputHasError ? classes.invalidEmail : classes.email;
+
   return {
     value: inputState.value,
     comment: valueComment,
-    hasError: inputHasError,
     valueChangeHandler,
     inputBlurHandler,
     reset,
+    emailClasses
   };
 };
 

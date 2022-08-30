@@ -1,0 +1,56 @@
+.names,
+.invalidnames {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  display: flex;
+  margin: 0.3rem 0;
+}
+.names label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0;
+  font-weight: bold;
+}
+.invalidnames label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0;
+  font-weight: bold;
+  color: #e52f2f;
+}
+.names input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+}
+.invalidnames input,
+.invalidEmail input,
+.invalidNumber input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+}
+.names p{
+  margin: 0.3rem 0;
+  font-size: 0.6rem;
+  color: #000000;
+}
+.invalidnames p,
+.invalidEmail p,
+.invalidNumber p {
+  margin: 0.3rem 0;
+  font-size: 0.6rem;
+  color: #e52f2f;
+}
+
+.names input:focus,
+.names input:active,
+.invalidnames input:focus,
+.invalidnames input:active {
+    outline:none;
+}

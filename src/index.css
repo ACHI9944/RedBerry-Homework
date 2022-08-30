@@ -1,7 +1,7 @@
 
 @font-face {
   font-family: 'HelveticaNeue';
-  src: url(/src/pictures/HelveticaNeue\ \(3\).ttc);
+  src: url('./assets/font/HelveticaNeue\ \(3\).ttc');
 }
 
 * {

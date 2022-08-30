@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
-import logo from "../pictures/redbrr.PNG";
-import redberry from "../pictures/redberylogo.png";
+import logo from "../assets/pictures/redbrr.PNG";
+import redberry from "../assets/pictures/redberylogo.png";
 
 const MainNavigation = () => {
   return (

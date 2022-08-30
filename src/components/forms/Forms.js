@@ -1,8 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import FormLayout from "../formLayout/FormLayout";
-
 import LaptopForm from "./LaptopForm";
 import PersonForm from "./PersonForm";
+
+
+
 
 const Forms = () => {
   const team = [
