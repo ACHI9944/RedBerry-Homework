@@ -7,6 +7,7 @@ const LaptopForm = () => {
   const icon = (
     <ion-icon name="chevron-back-outline"></ion-icon>
   );
+
   const goBack = () => {
     navigate("/add/personform");
   };
@@ -14,15 +15,16 @@ const LaptopForm = () => {
   const backToPersonForm = () => {
     navigate("/add/personform");
   };
+
   const saveInfo = () => {
     navigate("/added");
   };
+
   return (
     <div>
       <button onClick={goBack} className={classes.backButton}>
         {icon}
       </button>
-      <p>ლეპტოპის ინფო</p>
       <button className={classes.button} onClick={backToPersonForm}>
         უკან
       </button>

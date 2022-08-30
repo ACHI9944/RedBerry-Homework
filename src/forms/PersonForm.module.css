@@ -1,6 +1,139 @@
+.backButton {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0;
+  margin: 0;
+  width: 0;
+  height: 0;
+}
+.personform {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.fullname {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+}
+
+.names,
+.invalidnames {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  display: flex;
+  margin: 0.3rem 0;
+}
+.email,
+.invalidEmail,
+.number,
+.invalidNumber {
+  width: 80%;
+  margin: 0.3rem 0;
+}
+
+.names label,
+.email label,
+.number label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0;
+  font-weight: bold;
+}
+.invalidnames label,
+.invalidEmail label,
+.invalidNumber label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0;
+  font-weight: bold;
+  color: #e52f2f;
+}
+
+.names input,
+.email input,
+.number input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+}
+.invalidnames input,
+.invalidEmail input,
+.invalidNumber input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+}
+
+.names p,
+.email p,
+.number p {
+  margin: 0.3rem 0;
+  font-size: 0.6rem;
+  color: #000000;
+}
+.invalidnames p,
+.invalidEmail p,
+.invalidNumber p {
+  margin: 0.3rem 0;
+  font-size: 0.6rem;
+  color: #e52f2f;
+}
 
 
-.button {
+.names input:focus,
+.names input:active,
+.email input:focus,
+.email input:active,
+.number input:focus,
+.number input:active,
+.invalidnames input:focus,
+.invalidnames input:active,
+.invalidEmail input:focus,
+.invalidEmail input:active,
+.invalidNumber input:focus,
+.invalidNumber input:active,
+.select:focus,
+.select:active  {
+  outline: none;
+}
+
+
+.select {
+  width: 80%;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  margin: 10px;
+  
+}
+
+.select option {
+  background-color: #ffffff;
+  border: none;
+}
+
+
+
+
+.forwardButton {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.forwardButton button {
   width: 5rem;
   height: 2rem;
   background-color: #62a1eb;
@@ -8,10 +141,3 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.backButton {
-  padding: 0;
-  margin: 0;
-  width: 0;
-  height: 0;
-}
-

@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import classes from "./Completed.module.css";
 import img from "../pictures/completed.PNG";
-import { useNavigate } from "react-router-dom";
+
 
 const Completed = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Completed = () => {
   return (
     <div className={classes.layer}>
       <div className={classes.completed}>
-        <img src={img} alt="img"></img>
+        <img src={img} alt="img" />
         <h4>ჩანაწერი დამატებულია</h4>
         <button className={classes.addToList} onClick={addDataToList}>
           სიაში გადაყვანა

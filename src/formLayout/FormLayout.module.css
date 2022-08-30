@@ -1,5 +1,5 @@
 .layout {
-  text-align: center;
+  align-items: center;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
 }
 
 .forms {
-  margin: 0rem auto;
+  margin: 0rem;
   background-color: #ffffff;
   width: 70%;
   height: 70vh;
@@ -16,11 +16,11 @@
 }
 
 .logo {
-  margin: 1rem auto;
+  margin: 2rem auto 0rem auto;
 }
 
 .logo img {
-  width: 85px;
+  width: 45px;
   height: auto;
 }
 

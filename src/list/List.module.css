@@ -6,6 +6,9 @@
   width: 100vw;
   background-color: #ffffff;
 }
+.layer h4 {
+  margin: 1rem auto;
+}
 
 .layer button {
   padding: 0;
@@ -16,9 +19,9 @@
 
 
 .laptopList {
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  height: 80%;
+  flex-flow: row wrap
+  
 }
