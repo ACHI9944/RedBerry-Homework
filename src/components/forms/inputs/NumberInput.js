@@ -1,17 +1,34 @@
-import UseNumberInput from "../../../hooks/UseNumberInput";
-import classes from './NumberInput.module.css'
+import UseInput from "../../../hooks/UseInput";
+import classes from "./NumberInput.module.css";
+
+const isExactNumbers = (value) => value.toString().trim().length === 13;
+const startsCorrectly = (value) => {
+  const numStart = value.trim().toString().slice(0, 5);
+  const validStart = "+9955";
+  if (numStart === validStart) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const isValueValid = (value) => {
+  if (isExactNumbers(value) && startsCorrectly(value)) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const NumberInput = () => {
   const {
     value: numberValue,
-    comment: numberComment,
-    valueChangeHandler: numberChangeHandler,
     valueHasError: numberHasError,
+    valueChangeHandler: numberChangeHandler,
     inputBlurHandler: numberBlurHandler,
     reset: resetnumber,
-  } = UseNumberInput();
+  } = UseInput(isValueValid);
 
-  
   const numberClasses = numberHasError ? classes.invalidNumber : classes.number;
 
   return (
@@ -25,7 +42,7 @@ const NumberInput = () => {
         onBlur={numberBlurHandler}
         value={numberValue}
       />
-      <p>{numberComment}</p>
+      <p>უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</p>
     </div>
   );
 };

@@ -1,15 +1,25 @@
-import UseEmailInput from "../../../hooks/UseEmailInput";
-import classes from './EmailInput.module.css'
+import UseInput from "../../../hooks/UseInput";
+import classes from "./EmailInput.module.css";
+
+const emailEndsCorrectly = (value) => {
+  const slicedValue = value.trim().slice(-12);
+  const redberry = "@redberry.ge";
+  if (redberry === slicedValue) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 const EmailInput = () => {
   const {
     value: emailValue,
-    comment: emailComment,
-    valueChangeHandler: emailChangeHandler,
     valueHasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
-  } = UseEmailInput();
+  } = UseInput(emailEndsCorrectly);
+
   const emailClasses = emailHasError ? classes.invalidEmail : classes.email;
 
   return (
@@ -22,7 +32,7 @@ const EmailInput = () => {
         onBlur={emailBlurHandler}
         value={emailValue}
       />
-      <p>{emailComment}</p>
+      <p>უნდა მთავრდებოდეს @redberry.ge-ით"</p>
     </div>
   );
 };

@@ -1,18 +1,28 @@
+import UseInput from "../../../hooks/UseInput";
+import classes from "./LaptopNameInput.module.css";
 
-import UseLaptopNameInput from "../../../hooks/UseLaptopNameInput";
-import classes from './LaptopNameInput.module.css'
+const isLatinWithNums = (value) => {
+  const regex = /[^a-zA-Z0-9!@#$%^&*()_+=]/ig 
+  const inputIsNotNormal = value.trim().match(regex);
+  if (inputIsNotNormal) {
+    return false;
+  } else {
+    return true;
+  }
+};
 
 const LaptopNameInput = () => {
-    const {
-        value: laptopNameValue,
-        comment: laptopNameComment,
-        valueHasError: laptopNameHasError,
-        valueChangeHandler: laptopNameChangeHandler,
-        inputBlurHandler: laptopNameBlurHandler,
-        reset: resetLaptopName,
-      } = UseLaptopNameInput();
-      
-      const laptopClasses = laptopNameHasError ? classes.laptopinvalidname : classes.laptopname
+  const {
+    value: laptopNameValue,
+    valueHasError: laptopNameHasError,
+    valueChangeHandler: laptopNameChangeHandler,
+    inputBlurHandler: laptopNameBlurHandler,
+    reset: resetLaptopName,
+  } = UseInput(isLatinWithNums);
+
+  const laptopClasses = laptopNameHasError
+    ? classes.laptopinvalidname
+    : classes.laptopname;
   return (
     <div className={laptopClasses}>
       <label htmlFor="name">ლეპტოპის სახელი</label>
@@ -23,7 +33,7 @@ const LaptopNameInput = () => {
         onBlur={laptopNameBlurHandler}
         value={laptopNameValue}
       />
-      <p>{laptopNameComment}</p>
+      <p>ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
     </div>
   );
 };
