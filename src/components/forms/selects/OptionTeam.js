@@ -1,7 +1,7 @@
 
 import { Fragment } from "react";
 
-const TeamOption = (props) => {
+const OptionTeam = (props) => {
   return (
     <Fragment>
       <option value="თიმი"  disabled hidden>
@@ -12,4 +12,4 @@ const TeamOption = (props) => {
   );
 };
 
-export default TeamOption;
+export default OptionTeam;

@@ -1,5 +1,4 @@
 import { useEffect, useReducer, useState } from "react";
-import classes from './UseEmailInput.module.css'
 
 //Default functions for checking input validity
 
@@ -25,7 +24,7 @@ const inputStateReducer = (state, action) => {
     return {
       value: action.value,
       isTouched: true,
-      isValid:emailEndsCorrectly(action.value),
+      isValid: emailEndsCorrectly(action.value),
     };
   }
   if (action.type === "BLUR") {
@@ -62,41 +61,31 @@ const UseEmailInput = () => {
     dispatch({ type: "RESET" });
   };
 
-  //Function to determine comment under input and whether it has error or not.
 
-  const checker = function (state) {
-    const valueHasError = !state.isValid && state.isTouched;
-    let valueComment = <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>;
-    if (!state.isValid && state.isTouched) {
-      valueComment = <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>;
-    } else if (state.isValid && state.isTouched) {
-      valueComment = <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>;
-    }
-    return { valueComment, valueHasError };
-  };
-  //destructuring checker function
-  const {valueComment, valueHasError} = checker(inputState);
+  const valueComment = "უნდა მთავრდებოდეს @redberry.ge-ით";
+  const valueHasError = !inputState.isValid && inputState.isTouched
 
   //using useEffect to avoid unnecessary rerenderings while typing
   const [inputHasError, setInputHasError] = useState(false);
+  const [inputcomment, setInputComment] = useState(null);
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       setInputHasError(valueHasError);
+      setInputComment(valueComment);
     }, 1);
     return () => {
       clearTimeout(identifier);
     };
-  }, [valueHasError]);
-//query for dynamic classes
-  const emailClasses = inputHasError ? classes.invalidEmail : classes.email;
+  }, [valueHasError, valueComment]);
 
   return {
     value: inputState.value,
-    comment: valueComment,
+    comment: inputcomment,
+    valueHasError: inputHasError,
     valueChangeHandler,
     inputBlurHandler,
     reset,
-    emailClasses
   };
 };
 

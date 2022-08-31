@@ -1,7 +1,7 @@
 
 import { Fragment } from "react";
 
-const PositionOption = (props) => {
+const OptionPosition = (props) => {
   return (
     <Fragment>
       <option value="პოზიცია" disabled hidden>
@@ -12,4 +12,4 @@ const PositionOption = (props) => {
   );
 };
 
-export default PositionOption;
+export default OptionPosition;

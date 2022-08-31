@@ -1,15 +1,20 @@
 import UseNamesInput from "../../../hooks/UseNamesInput";
-
+import classes from "./FirstnameLastname.module.css";
 
 const LastNameInput = () => {
   const {
     value: lastNameValue,
     comment: lastNameComment,
     valueChangeHandler: lastNameChangeHandler,
+    valuehasError: lastNameHasError,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetlastName,
-    valueClasses: lastNameClasses,
   } = UseNamesInput();
+
+  const lastNameClasses = lastNameHasError
+    ? classes.invalidnames
+    : classes.names;
+
   return (
     <div className={lastNameClasses}>
       <label htmlFor="surname">გვარი</label>
@@ -20,7 +25,7 @@ const LastNameInput = () => {
         onBlur={lastNameBlurHandler}
         value={lastNameValue}
       />
-      {lastNameComment}
+      <p>{lastNameComment}</p>
     </div>
   );
 };

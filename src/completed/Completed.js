@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./Completed.module.css";
-import img from "../pictures/completed.PNG";
+import img from "../assets/pictures/completed.PNG";
 
 
 const Completed = () => {

@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import classes from './UseNamesInput.module.css'
+
 
 //Default functions for checking input validity
 const isMoreThanTwoLetters = (value) => value.trim().length > 2;
@@ -74,15 +74,15 @@ const UseNamesInput = () => {
 
   const checker = function (state) {
     const valueHasError = !state.isValid && state.isTouched;
-    let valueComment = <p>მინიმუმ 2 სიმბოლო, ქართული ასოები</p>;
+    let valueComment = 'მინიმუმ 2 სიმბოლო, ქართული ასოები';
     if (!state.isGeo && state.isMoreTwo && state.isTouched) {
-      valueComment = <p>გამოიყენე ქართული ასოები</p>;
+      valueComment = 'გამოიყენე ქართული ასოები';
     } else if (!state.isMoreTwo && state.isGeo && state.isTouched) {
-      valueComment = <p>მინიმუმ 2 სიმბოლო</p>;
+      valueComment = 'მინიმუმ 2 სიმბოლო';
     } else if (!state.isValid && state.isTouched) {
-      <p>მინიმუმ 2 სიმბოლო, ქართული ასოები</p>;
+      valueComment='მინიმუმ 2 სიმბოლო, ქართული ასოები';
     } else if (state.isValid && state.isTouched) {
-      valueComment = <p>მინიმუმ 2 სიმბოლო, ქართული ასოები</p>;
+      valueComment = 'მინიმუმ 2 სიმბოლო, ქართული ასოები';
     }
     return { valueComment, valueHasError };
   };
@@ -92,28 +92,25 @@ const UseNamesInput = () => {
 
   //using useEffect to avoid unnecessary rerenderings while typing
   const [inputHasError, setInputHasError] = useState(false);
+  const [inputcomment, setInputComment] = useState(null);
   useEffect(() => {
     const identifier = setTimeout(() => {
       setInputHasError(valueHasError);
+      setInputComment(valueComment)
     }, 1);
     return () => {
       clearTimeout(identifier);
     };
-  }, [valueHasError]);
+  }, [valueHasError,valueComment]);
 
-  //query for dynamic classes
-  const valueClasses = inputHasError
-  ? classes.invalidnames
-  : classes.names;
-
+ 
   return {
     value: inputState.value,
-    comment: valueComment,
-    hasError: inputHasError,
+    comment: inputcomment,
+    valuehasError: inputHasError,
     valueChangeHandler,
     inputBlurHandler,
     reset,
-    valueClasses
   };
 };
 

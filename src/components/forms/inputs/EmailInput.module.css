@@ -1,53 +1,53 @@
-.number,
-.invalidNumber {
+.email,
+.invalidEmail {
   width: 80%;
-  margin: 0.3rem 0;
 }
 
-.number label {
+.email label {
   font-size: 0.7rem;
   display: flex;
   justify-content: flex-start;
-  margin: 0.2rem 0;
+  margin: 0.4rem 0 0.2rem 0;
   font-weight: bold;
 }
-
-.invalidNumber label {
+.invalidEmail label {
   font-size: 0.7rem;
   display: flex;
   justify-content: flex-start;
-  margin: 0.2rem 0;
+  margin: 0.4rem 0 0.2rem 0;
   font-weight: bold;
   color: #e52f2f;
 }
-.number input {
+
+.email input {
   width: 100%;
   height: 30px;
   border: 1.8px solid #8ac0e2;
   border-radius: 8px;
+  margin: 0.2rem 0;
 }
-
-.invalidNumber input {
+.invalidEmail input {
   width: 100%;
   height: 30px;
   border: 1.8px solid #e52f2f;
   border-radius: 8px;
+  margin: 0.2rem 0;
 }
 
-.number p {
-  margin: 0.3rem 0;
+.email p {
+  margin: 0.2rem 0 0.4rem 0;
   font-size: 0.6rem;
   color: #000000;
 }
-.invalidNumber p {
-  margin: 0.3rem 0;
+.invalidEmail p {
+  margin: 0.2rem 0 0.4rem 0;
   font-size: 0.6rem;
   color: #e52f2f;
 }
 
-.number input:focus,
-.number input:active,
-.invalidNumber input:focus,
-.invalidNumber input:active {
+.email input:focus,
+.email input:active,
+.invalidEmail input:focus,
+.invalidEmail input:active {
   outline: none;
 }

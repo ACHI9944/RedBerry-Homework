@@ -1,24 +1,20 @@
 import { useEffect, useReducer, useState } from "react";
 
 //Default functions for checking input validity
-
-const isExactNumbers = (value) => value.toString().trim().length === 13;
-const startsCorrectly = (value) => {
-  const numStart = value.trim().toString().slice(0, 5);
-  const validStart = "+9955";
-  if (numStart === validStart) {
+const isLatinWithNums = (value) => {
+  const regex = /[^a-zA-Z0-9$@$!%*?&#^-_. +]+$/gi;
+  const inputIsNormal = value.trim().search(regex);
+  if (inputIsNormal) {
     return true;
   } else {
     return false;
   }
 };
 
-// Reducer for number input
+// Reducer for name and surname inputs
 const initialInputState = {
   value: "",
   isTouched: false,
-  numStartsCorrectly: false,
-  numIsExactNumbers: false,
   isValid: false,
 };
 
@@ -27,7 +23,7 @@ const inputStateReducer = (state, action) => {
     return {
       value: action.value,
       isTouched: true,
-      isValid: startsCorrectly(action.value) && isExactNumbers(action.value),
+      isValid: isLatinWithNums(action.value)
     };
   }
   if (action.type === "BLUR") {
@@ -47,7 +43,7 @@ const inputStateReducer = (state, action) => {
   return initialInputState;
 };
 
-const UseNumberInput = () => {
+const UseLaptopNameInput = () => {
   const [inputState, dispatch] = useReducer(
     inputStateReducer,
     initialInputState
@@ -64,13 +60,12 @@ const UseNumberInput = () => {
     dispatch({ type: "RESET" });
   };
 
-  const valueComment = "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს";
-  const valueHasError = !inputState.isValid && inputState.isTouched;
+  const valueComment = "ლათინური ასოები, ციფრები, !@#$%^&*()_+=";
+  const valueHasError = !inputState.isValid && inputState.isTouched
 
   //using useEffect to avoid unnecessary rerenderings while typing
   const [inputHasError, setInputHasError] = useState(false);
   const [inputcomment, setInputComment] = useState(null);
-
   useEffect(() => {
     const identifier = setTimeout(() => {
       setInputHasError(valueHasError);
@@ -81,15 +76,14 @@ const UseNumberInput = () => {
     };
   }, [valueHasError, valueComment]);
 
-
   return {
     value: inputState.value,
     comment: inputcomment,
-    valueHasError:inputHasError,
+    valueHasError: inputHasError,
     valueChangeHandler,
     inputBlurHandler,
     reset,
   };
 };
 
-export default UseNumberInput;
+export default UseLaptopNameInput;

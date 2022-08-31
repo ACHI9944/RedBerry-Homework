@@ -1,15 +1,18 @@
 import UseNumberInput from "../../../hooks/UseNumberInput";
-
+import classes from './NumberInput.module.css'
 
 const NumberInput = () => {
   const {
     value: numberValue,
     comment: numberComment,
     valueChangeHandler: numberChangeHandler,
+    valueHasError: numberHasError,
     inputBlurHandler: numberBlurHandler,
     reset: resetnumber,
-    numberClasses,
   } = UseNumberInput();
+
+  
+  const numberClasses = numberHasError ? classes.invalidNumber : classes.number;
 
   return (
     <div className={numberClasses}>
@@ -22,7 +25,7 @@ const NumberInput = () => {
         onBlur={numberBlurHandler}
         value={numberValue}
       />
-      {numberComment}
+      <p>{numberComment}</p>
     </div>
   );
 };

@@ -20,19 +20,22 @@
   justify-content: space-between;
   width: 80%;
   align-items: center;
+  margin: 0.3rem 0;
 }
 
 .forwardButton {
   width: 80%;
   display: flex;
   justify-content: flex-end;
+  margin: 0.3rem 0;
 }
 
 .forwardButton button {
-  width: 5rem;
-  height: 2rem;
+  width: 6rem;
+  height: 1.7rem;
   background-color: #62a1eb;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  
 }

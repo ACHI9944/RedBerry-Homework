@@ -8,6 +8,7 @@
 }
 .layer h4 {
   margin: 1rem auto;
+  
 }
 
 .layer button {
@@ -19,7 +20,7 @@
 
 
 .laptopList {
-  width: 75%;
+  width: 80%;
   display: flex;
   flex-wrap: wrap;
   flex-flow: row wrap

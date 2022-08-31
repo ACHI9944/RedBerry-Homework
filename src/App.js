@@ -3,8 +3,8 @@ import "./App.css";
 import Completed from "./completed/Completed";
 import MainNavigation from "./components/MainNavigation";
 import Forms from "./components/forms/Forms";
-import List from "./list/List";
-import ListItem from "./list/ListITem";
+import List from '../src/components/list/List'
+import ListItem from '../src/components/list/ListItems'
 
 function App() {
   return (

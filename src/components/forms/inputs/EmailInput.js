@@ -1,16 +1,16 @@
 import UseEmailInput from "../../../hooks/UseEmailInput";
-
-
+import classes from './EmailInput.module.css'
 
 const EmailInput = () => {
   const {
     value: emailValue,
     comment: emailComment,
     valueChangeHandler: emailChangeHandler,
+    valueHasError: emailHasError,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
-    emailClasses,
   } = UseEmailInput();
+  const emailClasses = emailHasError ? classes.invalidEmail : classes.email;
 
   return (
     <div className={emailClasses}>
@@ -22,7 +22,7 @@ const EmailInput = () => {
         onBlur={emailBlurHandler}
         value={emailValue}
       />
-      {emailComment}
+      <p>{emailComment}</p>
     </div>
   );
 };
