@@ -1,0 +1,55 @@
+.LapRam,
+.invalidLapRam {
+  width: 45%;
+  height: 100px;
+}
+
+.LapRam label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0 0.1rem 0;
+  font-weight: bold;
+}
+
+.invalidLapRam label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: #e52f2f;
+  margin: 0.2rem 0 0.1rem 0;
+}
+.LapRam input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.invalidLapRam input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.LapRam p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #000000;
+}
+.invalidLapRam p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #e52f2f;
+}
+
+.LapRam input:focus,
+.LapRam input:active,
+.invalidLapRam input:focus,
+.invalidLapRam input:active {
+  outline: none;
+}

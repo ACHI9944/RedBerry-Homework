@@ -1,0 +1,44 @@
+.memoryRadio,
+.invalidmemoryRadio {
+  width: 45%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100px;
+}
+
+
+.memoryRadio p {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.4rem 0 0.2rem 0;
+  font-weight: bold;
+}
+
+.invalidmemoryRadio p {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: #e52f2f;
+  margin: 0.4rem 0 0.2rem 0;
+}
+
+.radios {
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.radios input {
+  height: 10px;
+  width: 10px;
+  margin: 0.2rem 0.6rem 0.2rem 0rem;
+  border: 2px solid #4D9AC3;
+}
+
+.radios label {
+  font-size: 0.62rem;
+  margin: 0.2rem 2.5rem 0.2rem 0;
+}

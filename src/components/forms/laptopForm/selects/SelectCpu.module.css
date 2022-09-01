@@ -1,0 +1,27 @@
+.Cpus:focus,
+.Cpus:active,
+.invalidCpus:focus,
+.invalidCpus:active {
+  outline: none;
+}
+.Cpus {
+  width: 32%;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  margin: 0.2rem 0 0.2rem 0;
+}
+.invalidCpus {
+  width: 32%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  border: 1.8px solid #e52f2f;
+  margin: 0.2rem 0 0.2rem 0;
+}
+
+.Cpus option {
+  background-color: #ffffff;
+  border: none;
+}

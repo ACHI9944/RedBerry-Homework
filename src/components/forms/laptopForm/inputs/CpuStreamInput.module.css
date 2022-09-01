@@ -1,0 +1,54 @@
+.CpuStream,
+.invalidCpuStream {
+  width: 32%;
+}
+
+.CpuStream label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0 0.1rem 0;
+  font-weight: bold;
+}
+
+.invalidCpuStream label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: #e52f2f;
+  margin: 0.2rem 0 0.1rem 0;
+}
+.CpuStream input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.invalidCpuStream input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.CpuStream p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #000000;
+}
+.invalidCpuStream p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #e52f2f;
+}
+
+.CpuStream input:focus,
+.CpuStream input:active,
+.invalidCpuStream input:focus,
+.invalidCpuStream input:active {
+  outline: none;
+}

@@ -1,0 +1,27 @@
+.select:focus,
+.select:active,
+.invalidSelect:focus,
+.invalidSelect:active {
+  outline: none;
+}
+.select {
+  width: 80%;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  margin: 0.7rem 0;
+}
+.invalidSelect {
+  width: 80%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  border: 1.8px solid #e52f2f;
+  margin: 0.7rem 0;
+}
+
+.select option {
+  background-color: #ffffff;
+  border: none;
+}

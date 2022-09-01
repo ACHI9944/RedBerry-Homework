@@ -1,0 +1,48 @@
+.date,
+.invalidDate {
+  width: 45%;
+  height: 100px;
+}
+
+.date label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0 0.1rem 0;
+  font-weight: bold;
+}
+
+.invalidDate label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: #e52f2f;
+  margin: 0.2rem 0 0.1rem 0;
+}
+
+.date input {
+  width: 100%;
+  height: 33px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+  padding: 10px;
+}
+
+.invalidDate input {
+  width: 100%;
+  height: 33px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+  padding: 10px;
+  color: #e52f2f;
+}
+
+.date input:focus,
+.date input:active,
+.invalidDate input:focus,
+.invalidDate input:active {
+  outline: none;
+}

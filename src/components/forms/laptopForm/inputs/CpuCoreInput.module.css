@@ -1,0 +1,54 @@
+.CpuCore,
+.invalidCpuCore {
+  width: 32%;
+}
+
+.CpuCore label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0 0.1rem 0;
+  font-weight: bold;
+}
+
+.invalidCpuCore label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: #e52f2f;
+  margin: 0.2rem 0 0.1rem 0;
+}
+.CpuCore input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.invalidCpuCore input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.CpuCore p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #000000;
+}
+.invalidCpuCore p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #e52f2f;
+}
+
+.CpuCore input:focus,
+.CpuCore input:active,
+.invalidCpuCore input:focus,
+.invalidCpuCore input:active {
+  outline: none;
+}

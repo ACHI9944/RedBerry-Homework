@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   background-color: #f6f6f6;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .logo {
-  margin: 2rem auto 0rem auto;
+  margin: 1rem auto 1.4rem auto;
 }
 
 .logo img {

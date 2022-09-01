@@ -1,0 +1,53 @@
+.laptopname,
+.laptopinvalidname {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  display: flex;
+}
+.laptopname label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0 0.1rem 0;
+  font-weight: bold;
+}
+.laptopinvalidname label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.2rem 0 0.1rem 0;
+  font-weight: bold;
+  color: #e52f2f;
+}
+.laptopname input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+.laptopinvalidname input {
+  width: 100%;
+  height: 30px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+.laptopname p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.54rem;
+  color: #000000;
+}
+.laptopinvalidname p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.54rem;
+  color: #e52f2f;
+}
+
+.laptopname input:focus,
+.laptopname input:active,
+.laptopinvalidname input:focus,
+.laptopinvalidname input:active {
+  outline: none;
+}

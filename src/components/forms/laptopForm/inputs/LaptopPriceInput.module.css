@@ -1,0 +1,55 @@
+.LaptopPrice,
+.invalidLaptopPrice {
+  width: 45%;
+  height: 100px;
+}
+
+.LaptopPrice label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0.1rem 0 0.1rem 0;
+  font-weight: bold;
+}
+
+.invalidLaptopPrice label {
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: #e52f2f;
+  margin: 0.2rem 0 0.1rem 0;
+}
+.LaptopPrice input {
+  width: 100%;
+  height: 33px;
+  border: 1.8px solid #8ac0e2;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.invalidLaptopPrice input {
+  width: 100%;
+  height: 33px;
+  border: 1.8px solid #e52f2f;
+  border-radius: 8px;
+  margin: 0.1rem 0;
+}
+
+.LaptopPrice p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #000000;
+}
+.invalidLaptopPrice p {
+  margin: 0.1rem 0 0.2rem 0;
+  font-size: 0.6rem;
+  color: #e52f2f;
+}
+
+.LaptopPrice input:focus,
+.LaptopPrice input:active,
+.invalidLaptopPrice input:focus,
+.invalidLaptopPrice input:active {
+  outline: none;
+}

@@ -1,0 +1,27 @@
+.LapBrand:focus,
+.LapBrand:active,
+.invalidLapBrand:focus,
+.invalidLapBrand:active {
+  outline: none;
+}
+.LapBrand {
+  width: 45%;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  margin: 0 0 0.5rem;
+}
+.invalidLapBrand {
+  width: 45%;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #ebebeb;
+  border: 1.8px solid #e52f2f;
+  margin: 0 0 0.5rem;
+}
+
+.LapBrand option {
+  background-color: #ffffff;
+  border: none;
+}
