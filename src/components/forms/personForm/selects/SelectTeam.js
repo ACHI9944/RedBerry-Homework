@@ -1,16 +1,30 @@
+import { useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import OptionTeam from "./OptionTeam";
-import classes from './SelectTeamAndPos.module.css'
+import classes from "./SelectTeamAndPos.module.css";
 
 const isNotEmpty = (value) => value.trim().length > 0;
 
 const SelectTeam = (props) => {
   const {
+    value: teamValue,
     valueChangeHandler: teamChangeHandler,
     inputBlurHandler: teamBlurHandler,
     valueHasError: teamHasError,
     reset: resetTeam,
   } = UseInputAndSelect(isNotEmpty);
+
+  const { onTakeData } = props;
+  useEffect(() => {
+    onTakeData({
+      name: "team",
+      value: {
+        inputValue: teamValue,
+        isvalid: !teamHasError,
+        blur: teamBlurHandler,
+      },
+    });
+  }, [teamHasError, teamValue, onTakeData, teamBlurHandler]);
 
   const selectClasses = teamHasError ? classes.invalidSelect : classes.select;
   return (

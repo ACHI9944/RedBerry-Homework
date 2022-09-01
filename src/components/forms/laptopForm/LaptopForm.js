@@ -10,13 +10,12 @@ import classes from "./LaptopForm.module.css";
 import MemoryRadio from "./radios/MemoryRadio";
 import SelectCpu from "./selects/SelectCpu";
 import SelectLapBrand from "./selects/SelectLapBrand";
-import LaptopPriceInput from './inputs/LaptopPriceInput'
-import Condition from './radios/Condition'
+import LaptopPriceInput from "./inputs/LaptopPriceInput";
+import Condition from "./radios/Condition";
+import Button from "../../button/Button";
 
 const LaptopForm = (props) => {
   const navigate = useNavigate();
-
-  const icon = <ion-icon name="chevron-back-outline"></ion-icon>;
 
   const goBack = () => {
     navigate("/add/personform");
@@ -26,29 +25,28 @@ const LaptopForm = (props) => {
     navigate("/add/personform");
   };
 
-  const saveInfo = () => {
+  const saveInfo = (event) => {
+    event.preventDefault()
     navigate("/added");
   };
 
   return (
     <Fragment>
-      <button onClick={goBack} className={classes.backButton}>
-        {icon}
-      </button>
+      <Button onBack={goBack} />
       <form className={classes.laptopForm}>
         <ImageInput />
         <div className={classes.lapNameAndBrand}>
-        <LaptopNameInput />
-        <SelectLapBrand lapBrands={props.lapBrands}/>
+          <LaptopNameInput />
+          <SelectLapBrand lapBrands={props.lapBrands} />
         </div>
         <div className={classes.aboutCpu}>
-            <SelectCpu Cpus={props.Cpus}/>
-            <CpuCoreInput />
-            <CpuStreamInput />
+          <SelectCpu Cpus={props.Cpus} />
+          <CpuCoreInput />
+          <CpuStreamInput />
         </div>
         <div className={classes.ramAndType}>
-        <LapRamInput />
-        <MemoryRadio />
+          <LapRamInput />
+          <MemoryRadio />
         </div>
         <div className={classes.dateAndPrice}>
           <DateInput />

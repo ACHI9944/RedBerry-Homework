@@ -1,5 +1,6 @@
-import { Fragment } from "react";
+import { Fragment, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../button/Button";
 import EmailInput from "./inputs/EmailInput";
 import FirstNameInput from "./inputs/FirstNameInput";
 import LastNameInput from "./inputs/LastNameInput";
@@ -8,16 +9,10 @@ import classes from "./PersonForm.module.css";
 import SelectPosition from "./selects/SelectPosition";
 import SelectTeam from "./selects/SelectTeam";
 
-
 const PersonForm = (props) => {
   const navigate = useNavigate();
-  const icon = <ion-icon name="chevron-back-outline"></ion-icon>;
   const goBack = () => {
     navigate("/main");
-  };
-
-  const forwardToNextInfo = () => {
-    navigate("/add/laptopForm");
   };
 
   //function for form submiting
@@ -25,20 +20,57 @@ const PersonForm = (props) => {
     return;
   };
 
+  const [personValues, setPersonValues] = useState({
+    firstname: "",
+    lastName: "",
+    team: "",
+    position: "",
+    email: "",
+    number: "",
+  });
+
+  const mergeData = useCallback((value) => {
+    setPersonValues((previousValues) => ({
+      ...previousValues,
+      [value.name]: value.value,
+    }));
+  }, []);
+  console.log(personValues);
+
+  const forwardToNextInfo = (event) => {
+    event.preventDefault();
+
+    if (
+      personValues.firstname.isvalid &&
+      personValues.lastName.isvalid &&
+      personValues.team.isvalid &&
+      personValues.position.isvalid &&
+      personValues.email.isvalid &&
+      personValues.number.isvalid
+    ) {
+      navigate("/add/laptopForm");
+    } else {
+      personValues.firstname.blur()
+      personValues.lastName.blur()
+      personValues.team.blur()
+      personValues.position.blur()
+      personValues.email.blur()
+      personValues.number.blur()
+    }
+  };
+
   return (
     <Fragment>
-      <button onClick={goBack} className={classes.backButton}>
-        {icon}
-      </button>
+      <Button onBack={goBack} />
       <form className={classes.personform} onSubmit={submitDataHandler}>
         <div className={classes.fullname}>
-          <FirstNameInput />
-          <LastNameInput />
+          <FirstNameInput onTakeData={mergeData} />
+          <LastNameInput onTakeData={mergeData} />
         </div>
-        <SelectTeam team={props.team}/>
-        <SelectPosition positions={props.positions}/>
-        <EmailInput />
-        <NumberInput />
+        <SelectTeam team={props.team} onTakeData={mergeData} />
+        <SelectPosition positions={props.positions} onTakeData={mergeData} />
+        <EmailInput onTakeData={mergeData} />
+        <NumberInput onTakeData={mergeData} />
         <div className={classes.forwardButton}>
           <button onClick={forwardToNextInfo}>შემდეგი</button>
         </div>

@@ -65,12 +65,4 @@
   cursor: pointer;
   margin: 0.5rem 0 ;
 }
-.backButton {
-  padding: 0;
-  margin: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+

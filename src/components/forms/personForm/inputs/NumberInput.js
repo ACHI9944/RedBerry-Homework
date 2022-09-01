@@ -1,3 +1,4 @@
+import { useCallback, useEffect, } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./NumberInput.module.css";
 
@@ -20,14 +21,30 @@ const isValueValid = (value) => {
   }
 };
 
-const NumberInput = () => {
+const NumberInput = (props) => {
   const {
     value: numberValue,
     valueHasError: numberHasError,
+    valueIsTouched: numberIsTouched,
     valueChangeHandler: numberChangeHandler,
     inputBlurHandler: numberBlurHandler,
     reset: resetnumber,
   } = UseInputAndSelect(isValueValid);
+
+
+  const { onTakeData} = props;
+ /*  const blurNumber = useCallback(()=>numberBlurHandler(),[numberBlurHandler]) */
+
+  useEffect(() => {
+    onTakeData({
+      name: "number",
+      value: {
+        inputValue: numberValue,
+        isvalid: !numberHasError && numberIsTouched,
+        blur: numberBlurHandler
+      },
+    });
+  }, [numberValue, numberHasError, onTakeData,numberIsTouched,numberBlurHandler]);
 
   const numberClasses = numberHasError ? classes.invalidNumber : classes.number;
 

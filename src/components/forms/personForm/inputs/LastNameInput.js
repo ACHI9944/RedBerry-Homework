@@ -1,9 +1,10 @@
+import { useCallback, useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./FirstnameLastname.module.css";
 
 const isMoreThanTwoLetters = (value) => value.trim().length > 2;
 const isGeorgian = (value) => {
-  const regex = /[^\u10A0-\u10FF]/ig;
+  const regex = /[^\u10A0-\u10FF]/gi;
   const allIsNotGeorgian = value.trim().match(regex);
   if (allIsNotGeorgian) {
     return false;
@@ -12,14 +13,14 @@ const isGeorgian = (value) => {
   }
 };
 const isValueValid = (value) => {
-  if(isMoreThanTwoLetters(value) && isGeorgian(value)) {
-    return true
-  }else {
-    return false
+  if (isMoreThanTwoLetters(value) && isGeorgian(value)) {
+    return true;
+  } else {
+    return false;
   }
-}
+};
 
-const LastNameInput = () => {
+const LastNameInput = (props) => {
   const {
     value: lastNameValue,
     valueHasError: lastNameHasError,
@@ -29,18 +30,34 @@ const LastNameInput = () => {
     reset: resetlastName,
   } = UseInputAndSelect(isValueValid);
 
+  const { onTakeData } = props;
+
+
+
+  useEffect(() => {
+    onTakeData({
+      name: "lastName",
+      value: {
+        inputValue: lastNameValue,
+        isvalid: !lastNameHasError && lastnameIsTouched,
+        blur: lastNameBlurHandler,
+      },
+      
+    });
+  }, [lastNameHasError, lastNameValue, onTakeData, lastnameIsTouched,lastNameBlurHandler]);
+
   const isGeo = isGeorgian(lastNameValue);
   const isMoreTwo = isMoreThanTwoLetters(lastNameValue);
   const checker = function (state) {
     let valueComment = "მინიმუმ 2 სიმბოლო, ქართული ასოები";
     if (!isGeo && isMoreTwo && lastnameIsTouched) {
       valueComment = "გამოიყენე ქართული ასოები";
-    } else if (!isMoreTwo && isGeo &&  lastnameIsTouched) {
+    } else if (!isMoreTwo && isGeo && lastnameIsTouched) {
       valueComment = "მინიმუმ 2 სიმბოლო";
-    }  
+    }
     return { valueComment };
   };
-  const { valueComment:lastNameComment } = checker(lastNameValue);
+  const { valueComment: lastNameComment } = checker(lastNameValue);
 
   const lastNameClasses = lastNameHasError
     ? classes.invalidnames

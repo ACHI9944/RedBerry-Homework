@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 
 
 // Reducer for Email input
@@ -29,9 +29,9 @@ const UseInputAndSelect = (validateValue) => {
   const valueChangeHandler = (event) => {
     dispatch({ type: "INPUT", value: event.target.value });
   };
-  const inputBlurHandler = (event) => {
+  const inputBlurHandler = useCallback((event) => {
     dispatch({ type: "BLUR" });
-  };
+  },[]);
 
   const reset = () => {
     dispatch({ type: "RESET" });

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./EmailInput.module.css";
 
@@ -11,7 +12,7 @@ const emailEndsCorrectly = (value) => {
   }
 };
 
-const EmailInput = () => {
+const EmailInput = (props) => {
   const {
     value: emailValue,
     valueHasError: emailHasError,
@@ -19,6 +20,18 @@ const EmailInput = () => {
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
   } = UseInputAndSelect(emailEndsCorrectly);
+
+  const { onTakeData } = props;
+  useEffect(() => {
+    onTakeData({
+      name: "email",
+      value: {
+        inputValue: emailValue,
+        isvalid: !emailHasError,
+        blur: emailBlurHandler,
+      },
+    });
+  }, [emailHasError, emailValue, onTakeData,emailBlurHandler]);
 
   const emailClasses = emailHasError ? classes.invalidEmail : classes.email;
 
