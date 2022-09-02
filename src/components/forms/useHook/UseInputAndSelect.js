@@ -16,6 +16,8 @@ const inputStateReducer = (state, action) => {
   }
   if (action.type === "RESET") {
     return { value: "", isTouched: false };
+  } if(action.type === 'local') {
+    return { value: action.value, isTouched:false}
   }
   return initialInputState;
 };
@@ -36,6 +38,10 @@ const UseInputAndSelect = (validateValue) => {
   const reset = useCallback(() => {
     dispatch({ type: "RESET" });
   },[]);
+
+  const setLocalStorage = useCallback((event) => {
+    dispatch({type: 'local', value:event})
+  },[])
 
   const valueIsValid = validateValue(inputState.value)
   const valueHasError = !valueIsValid && inputState.isTouched;
@@ -61,6 +67,7 @@ const UseInputAndSelect = (validateValue) => {
     valueChangeHandler,
     inputBlurHandler,
     reset,
+    setLocalStorage,
   };
 };
 

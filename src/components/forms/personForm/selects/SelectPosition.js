@@ -14,7 +14,21 @@ const SelectPosition = (props) => {
     inputBlurHandler: positionBlurHandler,
     valueHasError: positionHasError,
     reset: resetPosition,
+    setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
+
+  //Using useffects to put input value in local storage and take it out when page refreshed
+  useEffect(() => {
+    const storedValues = localStorage.getItem("position");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage]);
+
+  useEffect(() => {
+    localStorage.setItem("position", JSON.stringify(positionValue));
+  }, [positionValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;
@@ -41,11 +55,15 @@ const SelectPosition = (props) => {
     ? classes.invalidSelect
     : classes.select;
 
+  //setting variable to give selects position selected in localStorage
+  const storedValues = localStorage.getItem("position");
+  const parsed = JSON.parse(storedValues);
+  const defaultvalue = parsed ? parsed : "პოზიცია";
   return (
     <select
       className={selectClasses}
       name="pos"
-      defaultValue={"პოზიცია"}
+      defaultValue={defaultvalue}
       onChange={positionChangeHandler}
       onBlur={positionBlurHandler}
     >

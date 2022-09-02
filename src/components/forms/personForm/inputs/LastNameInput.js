@@ -30,9 +30,23 @@ const LastNameInput = (props) => {
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetlastName,
+    setLocalStorage
   } = UseInputAndSelect(isValueValid);
 
   const { onTakeData } = props;
+
+  //Using useffects to put input value in local storage and take it out when page refreshed  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("lastName");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage]);
+
+  useEffect(() => {
+    localStorage.setItem("lastName", JSON.stringify(lastNameValue));
+  }, [lastNameValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   useEffect(() => {

@@ -31,8 +31,21 @@ const NumberInput = (props) => {
     valueChangeHandler: numberChangeHandler,
     inputBlurHandler: numberBlurHandler,
     reset: resetnumber,
+    setLocalStorage
   } = UseInputAndSelect(isValueValid);
 
+  //Using useffects to put input value in local storage and take it out when page refreshed  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("number");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage]);
+
+  useEffect(() => {
+    localStorage.setItem("number", JSON.stringify(numberValue));
+  }, [numberValue]);
   const { onTakeData } = props;
 //Function to take data to the parent component, including functions to blur and reset
   useEffect(() => {

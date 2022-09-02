@@ -30,7 +30,21 @@ const FirstNameInput = (props) => {
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
-  } = UseInputAndSelect(isValueValid,'firstName');
+    setLocalStorage,
+  } = UseInputAndSelect(isValueValid, "firstName");
+
+  //Using useffects to put input value in local storage and take it out when page refreshed  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("firstName");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage,]);
+
+  useEffect(() => {
+    localStorage.setItem("firstName", JSON.stringify(firstNameValue));
+  }, [firstNameValue]);
 
   const { onTakeData } = props;
   //Function to take data to the parent component, including functions to blur and reset
@@ -70,10 +84,6 @@ const FirstNameInput = (props) => {
   const firstNameClasses = firstNameHasError
     ? classes.invalidnames
     : classes.names;
-
-  useEffect(() => {
-    localStorage.setItem("firstName", JSON.stringify(firstNameValue));
-  }, [firstNameValue]);
 
   return (
     <div className={firstNameClasses}>
