@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../button/Button";
 import EmailInput from "./inputs/EmailInput";
@@ -11,35 +11,35 @@ import SelectTeam from "./selects/SelectTeam";
 
 const PersonForm = (props) => {
   const navigate = useNavigate();
+
+  //function on button for going back to main
   const goBack = () => {
     navigate("/main");
   };
 
-  //function for form submiting
-  const submitDataHandler = () => {
-    return;
-  };
 
+  //State for gathering all data from component inputs
   const [personValues, setPersonValues] = useState({
-    firstname: "",
-    lastName: "",
-    team: "",
-    position: "",
-    email: "",
-    number: "",
+    firstname: {},
+    lastName: {},
+    team: {},
+    position: {},
+    email: {},
+    number: {},
   });
 
+
+  //function for merging incoming data to existing data in state
   const mergeData = useCallback((value) => {
     setPersonValues((previousValues) => ({
       ...previousValues,
       [value.name]: value.value,
     }));
-  }, []);
-  console.log(personValues);
+  }, [setPersonValues]);
 
-  const forwardToNextInfo = (event) => {
+  //function for submitting form. to check validity of every single input
+  const submitDataHandler = (event) => {
     event.preventDefault();
-
     if (
       personValues.firstname.isvalid &&
       personValues.lastName.isvalid &&
@@ -50,12 +50,12 @@ const PersonForm = (props) => {
     ) {
       navigate("/add/laptopForm");
     } else {
-      personValues.firstname.blur()
-      personValues.lastName.blur()
-      personValues.team.blur()
-      personValues.position.blur()
-      personValues.email.blur()
-      personValues.number.blur()
+      personValues.firstname.blur();
+      personValues.lastName.blur();
+      personValues.team.blur();
+      personValues.position.blur();
+      personValues.email.blur();
+      personValues.number.blur();
     }
   };
 
@@ -64,7 +64,7 @@ const PersonForm = (props) => {
       <Button onBack={goBack} />
       <form className={classes.personform} onSubmit={submitDataHandler}>
         <div className={classes.fullname}>
-          <FirstNameInput onTakeData={mergeData} />
+          <FirstNameInput onTakeData={mergeData}  />
           <LastNameInput onTakeData={mergeData} />
         </div>
         <SelectTeam team={props.team} onTakeData={mergeData} />
@@ -72,7 +72,7 @@ const PersonForm = (props) => {
         <EmailInput onTakeData={mergeData} />
         <NumberInput onTakeData={mergeData} />
         <div className={classes.forwardButton}>
-          <button onClick={forwardToNextInfo}>შემდეგი</button>
+          <button>შემდეგი</button>
         </div>
       </form>
     </Fragment>

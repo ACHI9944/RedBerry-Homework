@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./FirstnameLastname.module.css";
 
+//function for Checking input validity
 const isMoreThanTwoLetters = (value) => value.trim().length > 2;
 const isGeorgian = (value) => {
   const regex = /[^\u10A0-\u10FF]/gi;
@@ -21,6 +22,7 @@ const isValueValid = (value) => {
 };
 
 const LastNameInput = (props) => {
+  //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: lastNameValue,
     valueHasError: lastNameHasError,
@@ -32,8 +34,7 @@ const LastNameInput = (props) => {
 
   const { onTakeData } = props;
 
-
-
+  //Function to take data to the parent component, including functions to blur and reset
   useEffect(() => {
     onTakeData({
       name: "lastName",
@@ -41,11 +42,19 @@ const LastNameInput = (props) => {
         inputValue: lastNameValue,
         isvalid: !lastNameHasError && lastnameIsTouched,
         blur: lastNameBlurHandler,
+        reset: resetlastName,
       },
-      
     });
-  }, [lastNameHasError, lastNameValue, onTakeData, lastnameIsTouched,lastNameBlurHandler]);
+  }, [
+    lastNameHasError,
+    lastNameValue,
+    onTakeData,
+    lastnameIsTouched,
+    lastNameBlurHandler,
+    resetlastName
+  ]);
 
+  //Function to change input validity text depending on validity and which validity is false
   const isGeo = isGeorgian(lastNameValue);
   const isMoreTwo = isMoreThanTwoLetters(lastNameValue);
   const checker = function (state) {
@@ -59,6 +68,7 @@ const LastNameInput = (props) => {
   };
   const { valueComment: lastNameComment } = checker(lastNameValue);
 
+  //Variable to change  input classes depending on value validity.
   const lastNameClasses = lastNameHasError
     ? classes.invalidnames
     : classes.names;

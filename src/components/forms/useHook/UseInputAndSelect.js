@@ -33,9 +33,9 @@ const UseInputAndSelect = (validateValue) => {
     dispatch({ type: "BLUR" });
   },[]);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     dispatch({ type: "RESET" });
-  };
+  },[]);
 
   const valueIsValid = validateValue(inputState.value)
   const valueHasError = !valueIsValid && inputState.isTouched;

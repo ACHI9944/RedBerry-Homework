@@ -1,7 +1,8 @@
-
+import { useEffect } from 'react';
 import UseInputAndSelect from '../../useHook/UseInputAndSelect';
 import classes from './LapRamInput.module.css'
 
+//function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
 const isNumber = (value) => {
   const regex = /[^0-9]/g;
@@ -20,7 +21,8 @@ const isValueValid = (value) => {
   }
 };
 
-const LapRamInput = () => {
+const LapRamInput = (props) => {
+  //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: LapRamValue,
     valueHasError: LapRamHasError,
@@ -29,6 +31,27 @@ const LapRamInput = () => {
     reset: resetLapRam,
   } = UseInputAndSelect(isValueValid);
 
+  //Function to take data to the parent component, including functions to blur and reset
+  const { onTakeData } = props;
+  useEffect(() => {
+    onTakeData({
+      name: "lapram",
+      value: {
+        inputValue: LapRamValue,
+        isvalid: !LapRamHasError,
+        blur: LapRamBlurHandler,
+        reset: resetLapRam,
+      },
+    });
+  }, [
+    LapRamValue,
+    LapRamHasError,
+    LapRamBlurHandler,
+    resetLapRam,
+    onTakeData,
+  ]);
+
+  //Variable to change  input classes depending on value validity.
   const lapRamClasses = LapRamHasError
     ? classes.invalidLapRam
     : classes.LapRam;

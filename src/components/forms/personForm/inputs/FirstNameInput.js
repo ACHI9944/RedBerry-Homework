@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./FirstnameLastname.module.css";
 
+//function for Checking input validity
 const isMoreThanTwoLetters = (value) => value.trim().length > 2;
 const isGeorgian = (value) => {
   const regex = /[^\u10A0-\u10FF]/gi;
@@ -21,6 +22,7 @@ const isValueValid = (value) => {
 };
 
 const FirstNameInput = (props) => {
+  //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: firstNameValue,
     valueHasError: firstNameHasError,
@@ -28,9 +30,10 @@ const FirstNameInput = (props) => {
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName,
-  } = UseInputAndSelect(isValueValid);
+  } = UseInputAndSelect(isValueValid,'firstName');
 
   const { onTakeData } = props;
+  //Function to take data to the parent component, including functions to blur and reset
   useEffect(() => {
     onTakeData({
       name: "firstname",
@@ -38,10 +41,18 @@ const FirstNameInput = (props) => {
         inputValue: firstNameValue,
         isvalid: !firstNameHasError,
         blur: firstNameBlurHandler,
+        reset: resetFirstName,
       },
     });
-  }, [firstNameHasError, firstNameValue, onTakeData,firstNameBlurHandler]);
+  }, [
+    firstNameHasError,
+    firstNameValue,
+    onTakeData,
+    firstNameBlurHandler,
+    resetFirstName,
+  ]);
 
+  //Function to change input validity text depending on validity and which validity is false
   const isGeo = isGeorgian(firstNameValue);
   const isMoreTwo = isMoreThanTwoLetters(firstNameValue);
   const checker = function (state) {
@@ -55,9 +66,14 @@ const FirstNameInput = (props) => {
   };
   const { valueComment: firstNameComment } = checker(firstNameValue);
 
+  //Variable to change  input classes depending on value validity.
   const firstNameClasses = firstNameHasError
     ? classes.invalidnames
     : classes.names;
+
+  useEffect(() => {
+    localStorage.setItem("firstName", JSON.stringify(firstNameValue));
+  }, [firstNameValue]);
 
   return (
     <div className={firstNameClasses}>

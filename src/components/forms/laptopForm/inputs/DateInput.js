@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./DateInput.module.css";
 
+//function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
 const isNumber = (value) => {
   const regex = /[^0-9 /.]/g;
@@ -18,7 +20,8 @@ const isValueValid = (value) => {
     return false;
   }
 };
-const DateInput = () => {
+const DateInput = (props) => {
+  //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: dateValue,
     valueHasError: dateHasError,
@@ -26,6 +29,28 @@ const DateInput = () => {
     inputBlurHandler: dateBlurHandler,
     reset: resetDate,
   } = UseInputAndSelect(isValueValid);
+
+  //Function to take data to the parent component, including functions to blur and reset
+  const { onTakeData } = props;
+  useEffect(() => {
+    onTakeData({
+      name: "date",
+      value: {
+        inputValue: dateValue,
+        isvalid: !dateHasError,
+        blur: dateBlurHandler,
+        reset: resetDate,
+      },
+    });
+  }, [
+    dateValue,
+    dateHasError,
+    dateBlurHandler,
+    resetDate,
+    onTakeData,
+  ]);
+
+  //Variable to change  input classes depending on value validity.
   const dateClasses = dateHasError
     ? classes.invalidDate
     : classes.date;

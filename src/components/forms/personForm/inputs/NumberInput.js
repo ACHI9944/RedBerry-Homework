@@ -1,7 +1,8 @@
-import { useCallback, useEffect, } from "react";
+import { useEffect } from "react";
 import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import classes from "./NumberInput.module.css";
 
+//function for Checking input validity
 const isExactNumbers = (value) => value.toString().trim().length === 13;
 const startsCorrectly = (value) => {
   const numStart = value.trim().toString().slice(0, 5);
@@ -12,7 +13,6 @@ const startsCorrectly = (value) => {
     return false;
   }
 };
-
 const isValueValid = (value) => {
   if (isExactNumbers(value) && startsCorrectly(value)) {
     return true;
@@ -21,7 +21,9 @@ const isValueValid = (value) => {
   }
 };
 
+
 const NumberInput = (props) => {
+  //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: numberValue,
     valueHasError: numberHasError,
@@ -31,21 +33,28 @@ const NumberInput = (props) => {
     reset: resetnumber,
   } = UseInputAndSelect(isValueValid);
 
-
-  const { onTakeData} = props;
- /*  const blurNumber = useCallback(()=>numberBlurHandler(),[numberBlurHandler]) */
-
+  const { onTakeData } = props;
+//Function to take data to the parent component, including functions to blur and reset
   useEffect(() => {
     onTakeData({
       name: "number",
       value: {
         inputValue: numberValue,
         isvalid: !numberHasError && numberIsTouched,
-        blur: numberBlurHandler
+        blur: numberBlurHandler,
+        reset: resetnumber,
       },
     });
-  }, [numberValue, numberHasError, onTakeData,numberIsTouched,numberBlurHandler]);
+  }, [
+    numberValue,
+    numberHasError,
+    onTakeData,
+    numberIsTouched,
+    numberBlurHandler,
+    resetnumber,
+  ]);
 
+  //Variable to change  input classes depending on value validity.
   const numberClasses = numberHasError ? classes.invalidNumber : classes.number;
 
   return (
