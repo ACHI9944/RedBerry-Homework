@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import UseInputAndSelect from '../../useHook/UseInputAndSelect';
-import classes from './LapRamInput.module.css'
+import { useEffect } from "react";
+import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import classes from "./LapRamInput.module.css";
 
 //function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
@@ -26,21 +26,21 @@ const LapRamInput = (props) => {
   const {
     value: LapRamValue,
     valueHasError: LapRamHasError,
+    valueIsTouched: LapRamIsTouched,
     valueChangeHandler: LapRamChangeHandler,
     inputBlurHandler: LapRamBlurHandler,
     reset: resetLapRam,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isValueValid);
-  
 
-  //Using useffects to put input value in local storage and take it out when page refreshed  
+  //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("lapRam");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
       setLocalStorage(parsed);
     } else return;
-  }, [setLocalStorage,]);
+  }, [setLocalStorage]);
 
   useEffect(() => {
     localStorage.setItem("lapRam", JSON.stringify(LapRamValue));
@@ -53,23 +53,22 @@ const LapRamInput = (props) => {
       name: "lapram",
       value: {
         inputValue: LapRamValue,
-        isvalid: !LapRamHasError,
+        isvalid: !LapRamHasError && LapRamIsTouched,
         blur: LapRamBlurHandler,
         reset: resetLapRam,
       },
     });
   }, [
+    onTakeData,
     LapRamValue,
     LapRamHasError,
+    LapRamIsTouched,
     LapRamBlurHandler,
     resetLapRam,
-    onTakeData,
   ]);
 
   //Variable to change  input classes depending on value validity.
-  const lapRamClasses = LapRamHasError
-    ? classes.invalidLapRam
-    : classes.LapRam;
+  const lapRamClasses = LapRamHasError ? classes.invalidLapRam : classes.LapRam;
 
   return (
     <div className={lapRamClasses}>

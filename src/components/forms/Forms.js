@@ -1,8 +1,8 @@
+import React, { useCallback, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import FormLayout from "../formLayout/FormLayout";
 import LaptopForm from "./laptopForm/LaptopForm";
 import PersonForm from "./personForm/PersonForm";
-
 
 const Forms = () => {
   const lapBrands = [
@@ -67,34 +67,97 @@ const Forms = () => {
   ];
   const Cpus = [
     {
-      "id": 1,
-      "name": "Intel Core i3"
+      id: 1,
+      name: "Intel Core i3",
     },
     {
-      "id": 2,
-      "name": "Intel Core i5"
+      id: 2,
+      name: "Intel Core i5",
     },
     {
-      "id": 3,
-      "name": "Intel Core i7"
+      id: 3,
+      name: "Intel Core i7",
     },
     {
-      "id": 4,
-      "name": "Intel Core i9"
+      id: 4,
+      name: "Intel Core i9",
     },
     {
-      "id": 5,
-      "name": "AMD Ryzen 3"
-    }
-  ]
+      id: 5,
+      name: "AMD Ryzen 3",
+    },
+  ];
+  const [values, setValues] = useState({
+    firstname: {},
+    lastName: {},
+    team: {},
+    position: {},
+    email: {},
+    number: {},
+    lapName: {},
+    LapBrand: {},
+    cpu: {},
+    cpucore: {},
+    cpustream: {},
+    lapram: {},
+    date: {},
+    lapPrice: {},
+    memoryRadio: {},
+    ConditionRadio: {},
+  });
+
+  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("allValues");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setValues(parsed);
+    } else return;
+  }, [setValues,]);
+
+  useEffect(() => {
+    localStorage.setItem("allValues", JSON.stringify(values));
+  }, [values]);
+
+
+  const onTakeData =  useCallback(
+    (broughtValue) => {
+      for (const key in broughtValue) {
+        setValues((previousValues) => ({
+          ...previousValues,
+          [key]: broughtValue[key],
+        }));
+      
+      }
+    },
+    [setValues]
+  );
+  console.log(values);
+
   return (
     <FormLayout>
       <Routes>
         <Route path="/" element={<Navigate to="personform" />} />
         <Route
           path="personform"
-          element={<PersonForm team={team} positions={positions} />}/>
-        <Route path="laptopForm" element={<LaptopForm lapBrands={lapBrands} Cpus={Cpus}/>} />
+          element={
+            <PersonForm
+              team={team}
+              positions={positions}
+              onTakeData={onTakeData}
+            />
+          }
+        />
+        <Route
+          path="laptopForm"
+          element={
+            <LaptopForm
+              lapBrands={lapBrands}
+              Cpus={Cpus}
+              onTakeData={onTakeData}
+            />
+          }
+        />
       </Routes>
     </FormLayout>
   );

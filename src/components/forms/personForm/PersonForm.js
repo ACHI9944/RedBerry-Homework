@@ -1,6 +1,6 @@
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../button/Button";
+import Button from "../../UI/button/Button";
 import EmailInput from "./inputs/EmailInput";
 import FirstNameInput from "./inputs/FirstNameInput";
 import LastNameInput from "./inputs/LastNameInput";
@@ -14,10 +14,9 @@ const PersonForm = (props) => {
 
   //function on button for going back to main
   const goBack = () => {
-    localStorage.clear()
+    localStorage.clear();
     navigate("/main");
   };
-
 
   //State for gathering all data from component inputs
   const [personValues, setPersonValues] = useState({
@@ -29,17 +28,23 @@ const PersonForm = (props) => {
     number: {},
   });
 
-
   //function for merging incoming data to existing data in state
-  const mergeData = useCallback((value) => {
-    setPersonValues((previousValues) => ({
-      ...previousValues,
-      [value.name]: value.value,
-    }));
-  }, [setPersonValues]);
+  const mergeData = useCallback(
+    (value) => {
+      setPersonValues((previousValues) => ({
+        ...previousValues,
+        [value.name]: value.value,
+      }));
+    },
+    [setPersonValues]
+  );
+
+
+  const { onTakeData } = props;
+ 
 
   //function for submitting form. to check validity of every single input
-  const submitDataHandler = (event) => {
+  const submitDataHandler = async (event) => {
     event.preventDefault();
     if (
       personValues.firstname.isvalid &&
@@ -49,6 +54,7 @@ const PersonForm = (props) => {
       personValues.email.isvalid &&
       personValues.number.isvalid
     ) {
+      await onTakeData(personValues);
       navigate("/add/laptopForm");
     } else {
       personValues.firstname.blur();
@@ -59,14 +65,12 @@ const PersonForm = (props) => {
       personValues.number.blur();
     }
   };
-
-  
   return (
     <Fragment>
       <Button onBack={goBack} />
       <form className={classes.personform} onSubmit={submitDataHandler}>
         <div className={classes.fullname}>
-          <FirstNameInput onTakeData={mergeData}  />
+          <FirstNameInput onTakeData={mergeData} />
           <LastNameInput onTakeData={mergeData} />
         </div>
         <SelectTeam team={props.team} onTakeData={mergeData} />

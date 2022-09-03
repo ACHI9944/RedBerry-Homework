@@ -26,20 +26,21 @@ const LaptopNameInput = (props) => {
   const {
     value: laptopNameValue,
     valueHasError: laptopNameHasError,
+    valueIsTouched: laptopNameIsTouched,
     valueChangeHandler: laptopNameChangeHandler,
     inputBlurHandler: laptopNameBlurHandler,
     reset: resetLaptopName,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
-  //Using useffects to put input value in local storage and take it out when page refreshed  
+  //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("lapName");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
       setLocalStorage(parsed);
     } else return;
-  }, [setLocalStorage,]);
+  }, [setLocalStorage]);
 
   useEffect(() => {
     localStorage.setItem("lapName", JSON.stringify(laptopNameValue));
@@ -52,17 +53,18 @@ const LaptopNameInput = (props) => {
       name: "lapName",
       value: {
         inputValue: laptopNameValue,
-        isvalid: !laptopNameHasError,
+        isvalid: !laptopNameHasError && laptopNameIsTouched,
         blur: laptopNameBlurHandler,
         reset: resetLaptopName,
       },
     });
   }, [
+    onTakeData,
     laptopNameValue,
     laptopNameHasError,
+    laptopNameIsTouched,
     laptopNameBlurHandler,
     resetLaptopName,
-    onTakeData,
   ]);
 
   //Variable to change  input classes depending on value validity.

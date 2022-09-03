@@ -18,13 +18,14 @@ const EmailInput = (props) => {
   const {
     value: emailValue,
     valueHasError: emailHasError,
+    valueIsTouched: emailIsTouched,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail,
     setLocalStorage,
   } = UseInputAndSelect(emailEndsCorrectly);
 
-  //Using useffects to put input value in local storage and take it out when page refreshed  
+  //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("email");
     if (storedValues) {
@@ -44,12 +45,19 @@ const EmailInput = (props) => {
       name: "email",
       value: {
         inputValue: emailValue,
-        isvalid: !emailHasError,
+        isvalid: !emailHasError && emailIsTouched,
         blur: emailBlurHandler,
         reset: resetEmail,
       },
     });
-  }, [emailHasError, emailValue, onTakeData, emailBlurHandler, resetEmail]);
+  }, [
+    emailHasError,
+    emailValue,
+    onTakeData,
+    emailIsTouched,
+    emailBlurHandler,
+    resetEmail,
+  ]);
 
   //Variable to change  input classes depending on value validity.
   const emailClasses = emailHasError ? classes.invalidEmail : classes.email;

@@ -11,6 +11,7 @@ const SelectPosition = (props) => {
   const {
     value: positionValue,
     valueChangeHandler: positionChangeHandler,
+    valueIsTouched: positionIsTouched,
     inputBlurHandler: positionBlurHandler,
     valueHasError: positionHasError,
     reset: resetPosition,
@@ -37,7 +38,7 @@ const SelectPosition = (props) => {
       name: "position",
       value: {
         inputValue: positionValue,
-        isvalid: !positionHasError,
+        isvalid: !positionHasError && positionIsTouched,
         blur: positionBlurHandler,
         reset: resetPosition,
       },
@@ -46,6 +47,7 @@ const SelectPosition = (props) => {
     positionHasError,
     positionValue,
     onTakeData,
+    positionIsTouched,
     positionBlurHandler,
     resetPosition,
   ]);

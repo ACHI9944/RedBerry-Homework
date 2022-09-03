@@ -25,20 +25,21 @@ const DateInput = (props) => {
   const {
     value: dateValue,
     valueHasError: dateHasError,
+    valueIsTouched: dateIsTouched,
     valueChangeHandler: dateChangeHandler,
     inputBlurHandler: dateBlurHandler,
     reset: resetDate,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
-  //Using useffects to put input value in local storage and take it out when page refreshed  
+  //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("date");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
       setLocalStorage(parsed);
     } else return;
-  }, [setLocalStorage,]);
+  }, [setLocalStorage]);
 
   useEffect(() => {
     localStorage.setItem("date", JSON.stringify(dateValue));
@@ -51,23 +52,22 @@ const DateInput = (props) => {
       name: "date",
       value: {
         inputValue: dateValue,
-        isvalid: !dateHasError,
+        isvalid: !dateHasError && dateIsTouched,
         blur: dateBlurHandler,
         reset: resetDate,
       },
     });
   }, [
+    onTakeData,
     dateValue,
     dateHasError,
+    dateIsTouched,
     dateBlurHandler,
     resetDate,
-    onTakeData,
   ]);
 
   //Variable to change  input classes depending on value validity.
-  const dateClasses = dateHasError
-    ? classes.invalidDate
-    : classes.date;
+  const dateClasses = dateHasError ? classes.invalidDate : classes.date;
 
   return (
     <div className={dateClasses}>
@@ -80,7 +80,7 @@ const DateInput = (props) => {
         onChange={dateChangeHandler}
         onBlur={dateBlurHandler}
       />
-   </div>
+    </div>
   );
 };
 

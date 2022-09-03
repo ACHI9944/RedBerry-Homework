@@ -11,10 +11,11 @@ const SelectCpu = (props) => {
   const {
     value: CpuValue,
     valueHasError: CpusHasError,
+    valueIsTouched: CpuIsTouched,
     valueChangeHandler: CpusChangeHandler,
     inputBlurHandler: CpusBlurHandler,
     reset: resetCpus,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
 
   //Using useffects to put input value in local storage and take it out when page refreshed
@@ -37,12 +38,19 @@ const SelectCpu = (props) => {
       name: "cpu",
       value: {
         inputValue: CpuValue,
-        isvalid: !CpusHasError,
+        isvalid: !CpusHasError && CpuIsTouched,
         blur: CpusBlurHandler,
         reset: resetCpus,
       },
     });
-  }, [CpuValue, CpusHasError, CpusBlurHandler, resetCpus, onTakeData]);
+  }, [
+    onTakeData,
+    CpuValue,
+    CpusHasError,
+    CpuIsTouched,
+    CpusBlurHandler,
+    resetCpus,
+  ]);
 
   //Variable to change  input classes depending on value validity.
   const selectClasses = CpusHasError ? classes.invalidCpus : classes.Cpus;

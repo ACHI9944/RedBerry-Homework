@@ -4,7 +4,7 @@
   justify-content: center;
   flex-direction: column;
   width: 80%;
-  height: 12rem;
+  height: 14rem;
   border: 2px dashed #4386a9;
   background-color: #f6f6f6;
   margin: 2rem 0;
@@ -20,7 +20,7 @@
   height: 12rem;
   border: 2px dashed #e52f2f;
   background-color: #fff1f1;
-  margin: 2rem 0;;
+  margin: 2rem 0;
   border-radius: 10px;
 }
 .image img {
@@ -30,7 +30,6 @@
   width: 50px;
   margin-top: -1rem;
 }
-
 
 .image input,
 .invalidImage input {
@@ -71,18 +70,22 @@
 
 .uploadedDiv {
   width: 80%;
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  height: 16rem;
+  margin: 2rem 0;
+  border-radius: 10px;
 }
 
 .upladedImg {
-  width:100%;
-  height: 12rem;
+  width: 100%;
+  height: 14rem;
   border: 1px #62a1eb solid;
   border-radius: 10px;
 }
 
 .uploadedLowerdiv {
-  margin: 0.5rem 0 ;
+  margin: 0.5rem 0;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -93,14 +96,13 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  
 }
 
-.uploadedDetails img{
-    margin: 0 0.5rem 0 0;
+.uploadedDetails img {
+  margin: 0 0.5rem 0 0;
 }
 
-.uploadedDetails label{
+.uploadedDetails label {
   font-size: 0.7rem;
   font-weight: bold;
   margin: 0 0.5rem;
@@ -111,7 +113,6 @@
   margin: 0 0.5rem;
 }
 
-
 .uploadedLowerdiv button {
   color: white;
   width: 6.5rem;
@@ -120,4 +121,23 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.again Input {
+  display: none;
+}
+
+.again Label {
+  width: 6rem;
+  height: 1.7rem;
+  background-color: #62a1eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: white;
+  margin: 1rem 0;
 }

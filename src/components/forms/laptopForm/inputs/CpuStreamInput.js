@@ -26,6 +26,7 @@ const CpuStreamInput = (props) => {
   const {
     value: CpuStreamValue,
     valueHasError: CpuStreamHasError,
+    valueIsTouched: CpuStreamIsTouched,
     valueChangeHandler: CpuStreamChangeHandler,
     inputBlurHandler: CpuStreamBlurHandler,
     reset: resetCpuStream,
@@ -52,7 +53,7 @@ const CpuStreamInput = (props) => {
       name: "cpustream",
       value: {
         inputValue: CpuStreamValue,
-        isvalid: !CpuStreamHasError,
+        isvalid: !CpuStreamHasError && CpuStreamIsTouched,
         blur: CpuStreamBlurHandler,
         reset: resetCpuStream,
       },
@@ -60,9 +61,10 @@ const CpuStreamInput = (props) => {
   }, [
     CpuStreamValue,
     CpuStreamHasError,
+    CpuStreamIsTouched,
+    onTakeData,
     CpuStreamBlurHandler,
     resetCpuStream,
-    onTakeData,
   ]);
 
   //Variable to change  input classes depending on value validity.

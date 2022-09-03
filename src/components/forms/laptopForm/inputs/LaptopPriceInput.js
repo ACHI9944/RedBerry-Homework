@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import UseInputAndSelect from '../../useHook/UseInputAndSelect';
-import classes from './LaptopPriceInput.module.css'
+import { useEffect } from "react";
+import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import classes from "./LaptopPriceInput.module.css";
 
 //function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
@@ -25,20 +25,21 @@ const LaptopPriceInput = (props) => {
   const {
     value: LaptopPriceValue,
     valueHasError: LaptopPriceHasError,
+    valueIsTouched: LaptopPriceIsTouched,
     valueChangeHandler: LaptopPriceChangeHandler,
     inputBlurHandler: LaptopPriceBlurHandler,
     reset: resetLaptopPrice,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
-  //Using useffects to put input value in local storage and take it out when page refreshed  
+  //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("lapPrice");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
       setLocalStorage(parsed);
     } else return;
-  }, [setLocalStorage,]);
+  }, [setLocalStorage]);
 
   useEffect(() => {
     localStorage.setItem("lapPrice", JSON.stringify(LaptopPriceValue));
@@ -51,17 +52,18 @@ const LaptopPriceInput = (props) => {
       name: "lapPrice",
       value: {
         inputValue: LaptopPriceValue,
-        isvalid: !LaptopPriceHasError,
+        isvalid: !LaptopPriceHasError && LaptopPriceIsTouched,
         blur: LaptopPriceBlurHandler,
         reset: resetLaptopPrice,
       },
     });
   }, [
+    onTakeData,
     LaptopPriceValue,
     LaptopPriceHasError,
+    LaptopPriceIsTouched,
     LaptopPriceBlurHandler,
     resetLaptopPrice,
-    onTakeData,
   ]);
 
   //Variable to change  input classes depending on value validity.
@@ -71,15 +73,15 @@ const LaptopPriceInput = (props) => {
 
   return (
     <div className={lapPriceClasses}>
-        <label>ლეპტოპის ფასი</label>
-    <input
-      type="text"
-      placeholder="0000"
-      value={LaptopPriceValue}
-      onChange={LaptopPriceChangeHandler}
-      onBlur={LaptopPriceBlurHandler}
-    />
-    <p>მხოლოდ ციფრები</p>
+      <label>ლეპტოპის ფასი</label>
+      <input
+        type="text"
+        placeholder="0000"
+        value={LaptopPriceValue}
+        onChange={LaptopPriceChangeHandler}
+        onBlur={LaptopPriceBlurHandler}
+      />
+      <p>მხოლოდ ციფრები</p>
     </div>
   );
 };

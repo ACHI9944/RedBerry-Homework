@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import classes from "./MemoryRadio.module.css";
 
-//function for Checking input validity
-const isNotEmpty = (value) => value.trim().length > 0;
-
 const MemoryRadio = (props) => {
   //Fnction to controll input value and check.
   const [checked, setChecked] = useState({ ssd: false, hdd: false });
@@ -19,12 +16,8 @@ const MemoryRadio = (props) => {
     });
   };
 
-  // variable to controll if user checked input or not
-  const isInvalid = !isNotEmpty(value);
-
   //Function to reset input
   const reset = useCallback((event) => {
-    event.preventDefault();
     setValue("");
     setChecked(() => {
       return {
@@ -39,12 +32,11 @@ const MemoryRadio = (props) => {
     const storedValues = localStorage.getItem("memoryType");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
-      console.log(parsed)
       setChecked(() => {
         return {
           ssd: parsed.ssd,
-          hdd: parsed.hdd
-        }
+          hdd: parsed.hdd,
+        };
       });
     } else return;
   }, [setChecked]);
@@ -53,17 +45,6 @@ const MemoryRadio = (props) => {
     localStorage.setItem("memoryType", JSON.stringify(checked));
   }, [checked]);
 
-  //Function to change radio class on submitting form if input is invalid
-  const inavlidClass = classes.invalidmemoryRadio;
-  const validClass = classes.memoryRadio;
-  const [radioClass, setRadioClass] = useState(validClass);
-  const alertMemoryRadio = useCallback(
-    (event) => {
-      setRadioClass(inavlidClass);
-    },
-    [inavlidClass]
-  );
-
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;
   useEffect(() => {
@@ -71,21 +52,13 @@ const MemoryRadio = (props) => {
       name: "memoryRadio",
       value: {
         inputValue: value,
-        isvalid: !isInvalid,
-        blur: alertMemoryRadio,
         reset: reset,
       },
     });
-  }, [
-    value,
-    isInvalid,
-    alertMemoryRadio,
-    reset,
-    onTakeData,
-  ]);
+  }, [value, reset, onTakeData]);
 
   return (
-    <div className={radioClass}>
+    <div className={classes.memoryRadio}>
       <p>მეხსიერების ტიპი</p>
       <div className={classes.radios}>
         <input

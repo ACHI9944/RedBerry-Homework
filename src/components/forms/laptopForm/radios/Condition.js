@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import classes from "./Condition.module.css";
 
-//function for Checking input validity
-const isNotEmpty = (value) => value.trim().length > 0;
-
 const Condition = (props) => {
   //Fnction to controll input value and check.
   const [checked, setChecked] = useState({ new: false, used: false });
@@ -18,12 +15,9 @@ const Condition = (props) => {
       };
     });
   };
-  // variable to controll if user checked input or not
-  const isInvalid = !isNotEmpty(value);
 
   //Function to reset input
-  const reset = useCallback((event) => {
-    event.preventDefault();
+  const reset = useCallback(() => {
     setValue("");
     setChecked(() => {
       return {
@@ -41,8 +35,8 @@ const Condition = (props) => {
       setChecked(() => {
         return {
           new: parsed.new,
-          used: parsed.used
-        }
+          used: parsed.used,
+        };
       });
     } else return;
   }, [setChecked]);
@@ -51,35 +45,20 @@ const Condition = (props) => {
     localStorage.setItem("condition", JSON.stringify(checked));
   }, [checked]);
 
-  //Function to change radio class on submitting form if input is invalid
-  const inavlidClass = classes.invalidCondition;
-  const validClass = classes.condition;
-  const [radioClass, setRadioClass] = useState(validClass);
-  const alertMemoryRadio = useCallback(
-    (event) => {
-      setRadioClass(inavlidClass);
-    },
-    [inavlidClass]
-  );
-
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including reset
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
       name: "ConditionRadio",
       value: {
         inputValue: value,
-        isvalid: !isInvalid,
-        blur: alertMemoryRadio,
         reset: reset,
       },
     });
-  }, [value, isInvalid, alertMemoryRadio, reset, onTakeData]);
-
- 
+  }, [value, reset, onTakeData]);
 
   return (
-    <div className={radioClass}>
+    <div className={classes.condition}>
       <p>ლეპტოპის მდგომარეობა</p>
       <div className={classes.radios}>
         <input

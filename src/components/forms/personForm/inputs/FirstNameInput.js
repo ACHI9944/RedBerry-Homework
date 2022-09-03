@@ -53,7 +53,7 @@ const FirstNameInput = (props) => {
       name: "firstname",
       value: {
         inputValue: firstNameValue,
-        isvalid: !firstNameHasError,
+        isvalid: !firstNameHasError && firstnameIsTouched,
         blur: firstNameBlurHandler,
         reset: resetFirstName,
       },
@@ -62,6 +62,7 @@ const FirstNameInput = (props) => {
     firstNameHasError,
     firstNameValue,
     onTakeData,
+    firstnameIsTouched,
     firstNameBlurHandler,
     resetFirstName,
   ]);

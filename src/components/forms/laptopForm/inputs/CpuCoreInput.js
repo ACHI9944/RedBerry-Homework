@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import UseInputAndSelect from '../../useHook/UseInputAndSelect';
-import classes from './CpuCoreInput.module.css'
+import { useEffect } from "react";
+import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import classes from "./CpuCoreInput.module.css";
 
 //function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
@@ -21,30 +21,31 @@ const isValueValid = (value) => {
   }
 };
 
-const CpuCoreInput = props => {
+const CpuCoreInput = (props) => {
   //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: CpuCoreValue,
     valueHasError: CpuCoreHasError,
+    valueIsTouched: CpuCoreIsTouched,
     valueChangeHandler: CpuCoreChangeHandler,
     inputBlurHandler: CpuCoreBlurHandler,
     reset: resetCpuCore,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
-  //Using useffects to put input value in local storage and take it out when page refreshed  
+  //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("cpuCore");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
       setLocalStorage(parsed);
     } else return;
-  }, [setLocalStorage,]);
+  }, [setLocalStorage]);
 
   useEffect(() => {
     localStorage.setItem("cpuCore", JSON.stringify(CpuCoreValue));
   }, [CpuCoreValue]);
-  
+
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;
   useEffect(() => {
@@ -52,7 +53,7 @@ const CpuCoreInput = props => {
       name: "cpucore",
       value: {
         inputValue: CpuCoreValue,
-        isvalid: !CpuCoreHasError,
+        isvalid: !CpuCoreHasError && CpuCoreIsTouched,
         blur: CpuCoreBlurHandler,
         reset: resetCpuCore,
       },
@@ -60,6 +61,7 @@ const CpuCoreInput = props => {
   }, [
     CpuCoreValue,
     CpuCoreHasError,
+    CpuCoreIsTouched,
     CpuCoreBlurHandler,
     resetCpuCore,
     onTakeData,

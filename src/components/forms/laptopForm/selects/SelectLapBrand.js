@@ -10,11 +10,12 @@ const SelectLapBrand = (props) => {
   //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: LapBrandValue,
+    valueHasError: LapBrandHasError,
+    valueIsTouched: LapBrandIsTouched,
     valueChangeHandler: LapBrandChangeHandler,
     inputBlurHandler: LapBrandBlurHandler,
-    valueHasError: LapBrandHasError,
     reset: resetLapBrand,
-    setLocalStorage
+    setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
 
   //Using useffects to put input value in local storage and take it out when page refreshed
@@ -37,17 +38,18 @@ const SelectLapBrand = (props) => {
       name: "LapBrand",
       value: {
         inputValue: LapBrandValue,
-        isvalid: !LapBrandHasError,
+        isvalid: !LapBrandHasError && LapBrandIsTouched,
         blur: LapBrandBlurHandler,
         reset: resetLapBrand,
       },
     });
   }, [
+    onTakeData,
     LapBrandValue,
     LapBrandHasError,
+    LapBrandIsTouched,
     LapBrandBlurHandler,
     resetLapBrand,
-    onTakeData,
   ]);
 
   //Variable to change  input classes depending on value validity.
@@ -55,7 +57,7 @@ const SelectLapBrand = (props) => {
     ? classes.invalidLapBrand
     : classes.LapBrand;
 
-    //setting variable to give selects position selected in localStorage
+  //setting variable to give selects position selected in localStorage
   const storedValues = localStorage.getItem("lapBrand");
   const parsed = JSON.parse(storedValues);
   const defaultvalue = parsed ? parsed : "ლეპტოპის ბრენდი";
