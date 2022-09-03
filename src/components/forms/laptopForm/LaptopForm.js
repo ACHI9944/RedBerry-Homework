@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CpuCoreInput from "./inputs/CpuCoreInput";
 import CpuStreamInput from "./inputs/CpuStreamInput";
@@ -12,7 +12,7 @@ import SelectCpu from "./selects/SelectCpu";
 import SelectLapBrand from "./selects/SelectLapBrand";
 import LaptopPriceInput from "./inputs/LaptopPriceInput";
 import Condition from "./radios/Condition";
-import Button from "../../button/Button";
+import Button from "../../UI/button/Button";
 
 const LaptopForm = (props) => {
   const navigate = useNavigate();
@@ -24,90 +24,91 @@ const LaptopForm = (props) => {
   const backToPersonForm = () => {
     navigate("/add/personform");
   };
-    
-//State for gathering all data from component inputs
-const [laptopValues, setlaptopValues] = useState({
-  lapName: {},
-  LapBrand: {},
-  cpu: {},
-  cpucore: {},
-  cpustream: {},
-  lapram: {},
-  date: {},
-  lapPrice: {},
-  memoryRadio: {},
-  ConditionRadio: {},
-});
-//function for merging incoming data to existing data in state
-const mergeData = useCallback((value) => {
-  setlaptopValues((previousValues) => ({
-    ...previousValues,
-    [value.name]: value.value,
-  }));
-}, []);
 
+  //State for gathering all data from component inputs
+  const [laptopValues, setlaptopValues] = useState({
+    img: {},
+    lapName: {},
+    LapBrand: {},
+    cpu: {},
+    cpucore: {},
+    cpustream: {},
+    lapram: {},
+    date: {},
+    lapPrice: {},
+    memoryRadio: {},
+    ConditionRadio: {},
+  });
 
-//function for submitting form. to check validity of every single input
-const submitDataHandler = (event) => {
-  event.preventDefault()
-  if (
-    laptopValues.img.isvalid &&
-    laptopValues.lapName.isvalid &&
-    laptopValues.LapBrand.isvalid &&
-    laptopValues.cpu.isvalid &&
-    laptopValues.cpucore.isvalid &&
-    laptopValues.cpustream.isvalid &&
-    laptopValues.lapram.isvalid &&
-    laptopValues.date.isvalid &&
-    laptopValues.lapPrice.isvalid &&
-    laptopValues.memoryRadio.isvalid &&
-    laptopValues.ConditionRadio.isvalid
-  ) {
-    navigate("/added");
-  } else {
-    laptopValues.img.blur()
-    laptopValues.lapName.blur()
-    laptopValues.LapBrand.blur()
-    laptopValues.cpu.blur()
-    laptopValues.cpucore.blur()
-    laptopValues.cpustream.blur()
-    laptopValues.lapram.blur()
-    laptopValues.date.blur()
-    laptopValues.lapPrice.blur()
-    laptopValues.memoryRadio.blur()
-    laptopValues.ConditionRadio.blur()
-  }
-};
+  //function for merging incoming data to existing data in state
+  const mergeData = useCallback((value) => {
+    setlaptopValues((previousValues) => ({
+      ...previousValues,
+      [value.name]: value.value,
+    }));
+  }, []);
+
+  //destructuring props
+  const { onTakeData, lapBrands, Cpus } = props;
+
+  //function for submitting form. to check validity of every single input
+  const submitDataHandler = async (event) => {
+    event.preventDefault();
+    if (
+      laptopValues.img.isvalid &&
+      laptopValues.lapName.isvalid &&
+      laptopValues.LapBrand.isvalid &&
+      laptopValues.cpu.isvalid &&
+      laptopValues.cpucore.isvalid &&
+      laptopValues.cpustream.isvalid &&
+      laptopValues.lapram.isvalid &&
+      laptopValues.date.isvalid &&
+      laptopValues.lapPrice.isvalid
+    ) {
+      await onTakeData(laptopValues);
+     // localStorage.clear();
+      navigate("/added");
+    } else {
+      laptopValues.img.blur();
+      laptopValues.lapName.blur();
+      laptopValues.LapBrand.blur();
+      laptopValues.cpu.blur();
+      laptopValues.cpucore.blur();
+      laptopValues.cpustream.blur();
+      laptopValues.lapram.blur();
+      laptopValues.date.blur();
+      laptopValues.lapPrice.blur();
+    }
+  };
+
   return (
     <Fragment>
       <Button onBack={goBack} />
       <form className={classes.laptopForm} onSubmit={submitDataHandler}>
-        <ImageInput onTakeData={mergeData}/>
+        <ImageInput onTakeData={mergeData} />
         <div className={classes.lapNameAndBrand}>
-          <LaptopNameInput onTakeData={mergeData}/>
-          <SelectLapBrand lapBrands={props.lapBrands} onTakeData={mergeData}/>
+          <LaptopNameInput onTakeData={mergeData} />
+          <SelectLapBrand lapBrands={lapBrands} onTakeData={mergeData} />
         </div>
         <div className={classes.aboutCpu}>
-          <SelectCpu Cpus={props.Cpus} onTakeData={mergeData}/>
-          <CpuCoreInput onTakeData={mergeData}/>
-          <CpuStreamInput onTakeData={mergeData}/>
+          <SelectCpu Cpus={Cpus} onTakeData={mergeData} />
+          <CpuCoreInput onTakeData={mergeData} />
+          <CpuStreamInput onTakeData={mergeData} />
         </div>
         <div className={classes.ramAndType}>
-          <LapRamInput onTakeData={mergeData}/>
-          <MemoryRadio onTakeData={mergeData}/>
+          <LapRamInput onTakeData={mergeData} />
+          <MemoryRadio onTakeData={mergeData} />
         </div>
         <div className={classes.dateAndPrice}>
-          <DateInput onTakeData={mergeData}/>
-          <LaptopPriceInput onTakeData={mergeData}/>
+          <DateInput onTakeData={mergeData} />
+          <LaptopPriceInput onTakeData={mergeData} />
         </div>
-        <Condition onTakeData={mergeData}/>
+        <Condition onTakeData={mergeData} />
         <div className={classes.lowerButtons}>
           <button className={classes.miniBackButton} onClick={backToPersonForm}>
             უკან
           </button>
-          <button className={classes.saveButton}>
-            დამახსოვრება
-          </button>
+          <button className={classes.saveButton}>დამახსოვრება</button>
         </div>
       </form>
     </Fragment>
