@@ -125,7 +125,7 @@ const Forms = () => {
       for (const key in broughtValue) {
         setValues((previousValues) => ({
           ...previousValues,
-          [key]: broughtValue[key],
+          [key]: broughtValue[key].inputValue,
         }));
       
       }

@@ -8,7 +8,6 @@ const isNotEmpty = (value) => {
 const Condition = (props) => {
   //Fnction to controll input value and check.
   const [value, setValue] = useState("");
-console.log(value)
   // variable for value validity
   const valueIsValid = isNotEmpty(value);
 
