@@ -27,22 +27,40 @@ const Condition = (props) => {
     setValue("");
     setChecked(() => {
       return {
-        ssd: false,
-        hdd: false,
+        new: false,
+        used: false,
       };
     });
   }, []);
 
-//Function to change radio class on submitting form if input is invalid
-const inavlidClass = classes.invalidCondition;
-const validClass = classes.condition;
-const [radioClass, setRadioClass] = useState(validClass);
-const alertMemoryRadio = useCallback(
-  (event) => {
-    setRadioClass(inavlidClass);
-  },
-  [inavlidClass]
-);
+  //Using useffects to put input value in local storage and take it out when page refreshed
+  useEffect(() => {
+    const storedValues = localStorage.getItem("condition");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setChecked(() => {
+        return {
+          new: parsed.new,
+          used: parsed.used
+        }
+      });
+    } else return;
+  }, [setChecked]);
+
+  useEffect(() => {
+    localStorage.setItem("condition", JSON.stringify(checked));
+  }, [checked]);
+
+  //Function to change radio class on submitting form if input is invalid
+  const inavlidClass = classes.invalidCondition;
+  const validClass = classes.condition;
+  const [radioClass, setRadioClass] = useState(validClass);
+  const alertMemoryRadio = useCallback(
+    (event) => {
+      setRadioClass(inavlidClass);
+    },
+    [inavlidClass]
+  );
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;
@@ -56,15 +74,10 @@ const alertMemoryRadio = useCallback(
         reset: reset,
       },
     });
-  }, [
-    value,
-    isInvalid,
-    alertMemoryRadio,
-    reset,
-    onTakeData,
-  ]);
+  }, [value, isInvalid, alertMemoryRadio, reset, onTakeData]);
 
-  
+ 
+
   return (
     <div className={radioClass}>
       <p>ლეპტოპის მდგომარეობა</p>
@@ -74,7 +87,7 @@ const alertMemoryRadio = useCallback(
           name="condition"
           value="new"
           onChange={handleChange}
-          checked={checked.hdd}
+          checked={checked.new}
         />
         <label>ახალი</label>
         <input
@@ -82,7 +95,7 @@ const alertMemoryRadio = useCallback(
           name="condition"
           value="used"
           onChange={handleChange}
-          checked={checked.hdd}
+          checked={checked.used}
         />
         <label>მეორადი</label>
       </div>

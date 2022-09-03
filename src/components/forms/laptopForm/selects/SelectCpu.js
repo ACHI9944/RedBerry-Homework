@@ -14,7 +14,21 @@ const SelectCpu = (props) => {
     valueChangeHandler: CpusChangeHandler,
     inputBlurHandler: CpusBlurHandler,
     reset: resetCpus,
+    setLocalStorage
   } = UseInputAndSelect(isNotEmpty);
+
+  //Using useffects to put input value in local storage and take it out when page refreshed
+  useEffect(() => {
+    const storedValues = localStorage.getItem("cpuValue");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage]);
+
+  useEffect(() => {
+    localStorage.setItem("cpuValue", JSON.stringify(CpuValue));
+  }, [CpuValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;
@@ -32,11 +46,16 @@ const SelectCpu = (props) => {
 
   //Variable to change  input classes depending on value validity.
   const selectClasses = CpusHasError ? classes.invalidCpus : classes.Cpus;
+
+  //setting variable to give selects position selected in localStorage
+  const storedValues = localStorage.getItem("cpuValue");
+  const parsed = JSON.parse(storedValues);
+  const defaultvalue = parsed ? parsed : "CPU";
   return (
     <select
       className={selectClasses}
       name="CPU"
-      defaultValue={"CPU"}
+      defaultValue={defaultvalue}
       onChange={CpusChangeHandler}
       onBlur={CpusBlurHandler}
     >

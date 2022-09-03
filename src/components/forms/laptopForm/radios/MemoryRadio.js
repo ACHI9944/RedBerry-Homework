@@ -34,6 +34,25 @@ const MemoryRadio = (props) => {
     });
   }, []);
 
+  //Using useffects to put input value in local storage and take it out when page refreshed
+  useEffect(() => {
+    const storedValues = localStorage.getItem("memoryType");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      console.log(parsed)
+      setChecked(() => {
+        return {
+          ssd: parsed.ssd,
+          hdd: parsed.hdd
+        }
+      });
+    } else return;
+  }, [setChecked]);
+
+  useEffect(() => {
+    localStorage.setItem("memoryType", JSON.stringify(checked));
+  }, [checked]);
+
   //Function to change radio class on submitting form if input is invalid
   const inavlidClass = classes.invalidmemoryRadio;
   const validClass = classes.memoryRadio;

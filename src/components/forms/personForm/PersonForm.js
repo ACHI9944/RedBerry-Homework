@@ -14,6 +14,7 @@ const PersonForm = (props) => {
 
   //function on button for going back to main
   const goBack = () => {
+    localStorage.clear()
     navigate("/main");
   };
 
@@ -59,6 +60,7 @@ const PersonForm = (props) => {
     }
   };
 
+  
   return (
     <Fragment>
       <Button onBack={goBack} />

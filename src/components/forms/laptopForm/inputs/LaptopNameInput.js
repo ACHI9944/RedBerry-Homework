@@ -29,7 +29,21 @@ const LaptopNameInput = (props) => {
     valueChangeHandler: laptopNameChangeHandler,
     inputBlurHandler: laptopNameBlurHandler,
     reset: resetLaptopName,
+    setLocalStorage
   } = UseInputAndSelect(isValueValid);
+
+  //Using useffects to put input value in local storage and take it out when page refreshed  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("lapName");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage,]);
+
+  useEffect(() => {
+    localStorage.setItem("lapName", JSON.stringify(laptopNameValue));
+  }, [laptopNameValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;

@@ -28,7 +28,21 @@ const DateInput = (props) => {
     valueChangeHandler: dateChangeHandler,
     inputBlurHandler: dateBlurHandler,
     reset: resetDate,
+    setLocalStorage
   } = UseInputAndSelect(isValueValid);
+
+  //Using useffects to put input value in local storage and take it out when page refreshed  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("date");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage,]);
+
+  useEffect(() => {
+    localStorage.setItem("date", JSON.stringify(dateValue));
+  }, [dateValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;

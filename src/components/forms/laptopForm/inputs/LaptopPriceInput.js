@@ -28,7 +28,21 @@ const LaptopPriceInput = (props) => {
     valueChangeHandler: LaptopPriceChangeHandler,
     inputBlurHandler: LaptopPriceBlurHandler,
     reset: resetLaptopPrice,
+    setLocalStorage
   } = UseInputAndSelect(isValueValid);
+
+  //Using useffects to put input value in local storage and take it out when page refreshed  
+  useEffect(() => {
+    const storedValues = localStorage.getItem("lapPrice");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage,]);
+
+  useEffect(() => {
+    localStorage.setItem("lapPrice", JSON.stringify(LaptopPriceValue));
+  }, [LaptopPriceValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;

@@ -14,7 +14,21 @@ const SelectLapBrand = (props) => {
     inputBlurHandler: LapBrandBlurHandler,
     valueHasError: LapBrandHasError,
     reset: resetLapBrand,
+    setLocalStorage
   } = UseInputAndSelect(isNotEmpty);
+
+  //Using useffects to put input value in local storage and take it out when page refreshed
+  useEffect(() => {
+    const storedValues = localStorage.getItem("lapBrand");
+    if (storedValues) {
+      const parsed = JSON.parse(storedValues);
+      setLocalStorage(parsed);
+    } else return;
+  }, [setLocalStorage]);
+
+  useEffect(() => {
+    localStorage.setItem("lapBrand", JSON.stringify(LapBrandValue));
+  }, [LapBrandValue]);
 
   //Function to take data to the parent component, including functions to blur and reset
   const { onTakeData } = props;
@@ -40,11 +54,16 @@ const SelectLapBrand = (props) => {
   const selectClasses = LapBrandHasError
     ? classes.invalidLapBrand
     : classes.LapBrand;
+
+    //setting variable to give selects position selected in localStorage
+  const storedValues = localStorage.getItem("lapBrand");
+  const parsed = JSON.parse(storedValues);
+  const defaultvalue = parsed ? parsed : "ლეპტოპის ბრენდი";
   return (
     <select
       className={selectClasses}
       name="lapBrand"
-      defaultValue={"ლეპტოპის ბრენდი"}
+      defaultValue={defaultvalue}
       onChange={LapBrandChangeHandler}
       onBlur={LapBrandBlurHandler}
     >
