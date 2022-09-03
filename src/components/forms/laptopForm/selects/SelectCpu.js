@@ -14,7 +14,6 @@ const SelectCpu = (props) => {
     valueIsTouched: CpuIsTouched,
     valueChangeHandler: CpusChangeHandler,
     inputBlurHandler: CpusBlurHandler,
-    reset: resetCpus,
     setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
 
@@ -31,7 +30,7 @@ const SelectCpu = (props) => {
     localStorage.setItem("cpuValue", JSON.stringify(CpuValue));
   }, [CpuValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -40,7 +39,6 @@ const SelectCpu = (props) => {
         inputValue: CpuValue,
         isvalid: !CpusHasError && CpuIsTouched,
         blur: CpusBlurHandler,
-        reset: resetCpus,
       },
     });
   }, [
@@ -49,7 +47,6 @@ const SelectCpu = (props) => {
     CpusHasError,
     CpuIsTouched,
     CpusBlurHandler,
-    resetCpus,
   ]);
 
   //Variable to change  input classes depending on value validity.

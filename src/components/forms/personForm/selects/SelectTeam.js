@@ -14,7 +14,6 @@ const SelectTeam = (props) => {
     valueIsTouched: teamIsTouched,
     valueChangeHandler: teamChangeHandler,
     inputBlurHandler: teamBlurHandler,
-    reset: resetTeam,
     setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
 
@@ -31,7 +30,7 @@ const SelectTeam = (props) => {
     localStorage.setItem("team", JSON.stringify(teamValue));
   }, [teamValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -40,7 +39,6 @@ const SelectTeam = (props) => {
         inputValue: teamValue,
         isvalid: !teamHasError && teamIsTouched,
         blur: teamBlurHandler,
-        reset: resetTeam,
       },
     });
   }, [
@@ -49,7 +47,6 @@ const SelectTeam = (props) => {
     onTakeData,
     teamIsTouched,
     teamBlurHandler,
-    resetTeam,
   ]);
 
   //Variable to change  input classes depending on value validity.

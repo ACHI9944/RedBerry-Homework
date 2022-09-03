@@ -29,7 +29,6 @@ const CpuStreamInput = (props) => {
     valueIsTouched: CpuStreamIsTouched,
     valueChangeHandler: CpuStreamChangeHandler,
     inputBlurHandler: CpuStreamBlurHandler,
-    reset: resetCpuStream,
     setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
@@ -46,7 +45,7 @@ const CpuStreamInput = (props) => {
     localStorage.setItem("cpuStream", JSON.stringify(CpuStreamValue));
   }, [CpuStreamValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur and
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -55,7 +54,6 @@ const CpuStreamInput = (props) => {
         inputValue: CpuStreamValue,
         isvalid: !CpuStreamHasError && CpuStreamIsTouched,
         blur: CpuStreamBlurHandler,
-        reset: resetCpuStream,
       },
     });
   }, [
@@ -64,7 +62,6 @@ const CpuStreamInput = (props) => {
     CpuStreamIsTouched,
     onTakeData,
     CpuStreamBlurHandler,
-    resetCpuStream,
   ]);
 
   //Variable to change  input classes depending on value validity.

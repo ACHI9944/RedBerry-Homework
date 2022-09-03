@@ -1,81 +1,67 @@
 import { useCallback, useEffect, useState } from "react";
 import classes from "./MemoryRadio.module.css";
 
+//Function to determine value validity
+const isNotEmpty = (value) => {
+  return value.length > 0;
+};
+
 const MemoryRadio = (props) => {
-  //Fnction to controll input value and check.
-  const [checked, setChecked] = useState({ ssd: false, hdd: false });
+  //Fnction to controll input value
   const [value, setValue] = useState("");
+
+  // variable for value validity
+  const valueIsValid = isNotEmpty(value);
+
+  // function for alerting user if radio input is empty
+  const [memoryClass , setMemoryClass] = useState(classes.memoryRadio)
+  const alert = useCallback(() => {
+    if(!valueIsValid) {
+      setMemoryClass(classes.invalidmemoryRadio)
+    } else {
+      setMemoryClass(classes.memoryRadio)
+    }
+  },[valueIsValid])
+
   const handleChange = (event) => {
     setValue(event.target.value);
-    setChecked(() => {
-      return {
-        ssd: false,
-        hdd: false,
-        [event.target.value]: true,
-      };
-    });
   };
-
-  //Function to reset input
-  const reset = useCallback((event) => {
-    setValue("");
-    setChecked(() => {
-      return {
-        ssd: false,
-        hdd: false,
-      };
-    });
-  }, []);
+  
 
   //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("memoryType");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
-      setChecked(() => {
-        return {
-          ssd: parsed.ssd,
-          hdd: parsed.hdd,
-        };
-      });
+      setValue(parsed);
     } else return;
-  }, [setChecked]);
+  }, [setValue]);
 
   useEffect(() => {
-    localStorage.setItem("memoryType", JSON.stringify(checked));
-  }, [checked]);
+    localStorage.setItem("memoryType", JSON.stringify(value));
+  }, [value]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
       name: "memoryRadio",
       value: {
         inputValue: value,
-        reset: reset,
+        isvalid: valueIsValid,
+        alert,
       },
     });
-  }, [value, reset, onTakeData]);
+  }, [value, onTakeData, valueIsValid,alert]);
 
+  
   return (
-    <div className={classes.memoryRadio}>
+    <div className={memoryClass}>
       <p>მეხსიერების ტიპი</p>
       <div className={classes.radios}>
-        <input
-          type="radio"
-          name="memory"
-          value="ssd"
-          checked={checked.ssd}
-          onChange={handleChange}
-        />
+        <input type="radio" name="memory" value="ssd" onChange={handleChange} />
         <label>SSD</label>
-        <input
-          type="radio"
-          name="memory"
-          value="hdd"
-          checked={checked.hdd}
-          onChange={handleChange}
-        />
+        <input type="radio" name="memory" value="hdd" onChange={handleChange} />
         <label>HDD</label>
       </div>
     </div>

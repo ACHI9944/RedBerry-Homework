@@ -29,7 +29,6 @@ const FirstNameInput = (props) => {
     valueIsTouched: firstnameIsTouched,
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
-    reset: resetFirstName,
     setLocalStorage,
   } = UseInputAndSelect(isValueValid, "firstName");
 
@@ -47,7 +46,7 @@ const FirstNameInput = (props) => {
   }, [firstNameValue]);
 
   const { onTakeData } = props;
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   useEffect(() => {
     onTakeData({
       name: "firstname",
@@ -55,7 +54,6 @@ const FirstNameInput = (props) => {
         inputValue: firstNameValue,
         isvalid: !firstNameHasError && firstnameIsTouched,
         blur: firstNameBlurHandler,
-        reset: resetFirstName,
       },
     });
   }, [
@@ -64,7 +62,6 @@ const FirstNameInput = (props) => {
     onTakeData,
     firstnameIsTouched,
     firstNameBlurHandler,
-    resetFirstName,
   ]);
 
   //Function to change input validity text depending on validity and which validity is false

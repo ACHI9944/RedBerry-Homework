@@ -1,6 +1,7 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../UI/button/Button";
+import Button from "../../button/Button";
+
 import EmailInput from "./inputs/EmailInput";
 import FirstNameInput from "./inputs/FirstNameInput";
 import LastNameInput from "./inputs/LastNameInput";

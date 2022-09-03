@@ -28,7 +28,6 @@ const LaptopPriceInput = (props) => {
     valueIsTouched: LaptopPriceIsTouched,
     valueChangeHandler: LaptopPriceChangeHandler,
     inputBlurHandler: LaptopPriceBlurHandler,
-    reset: resetLaptopPrice,
     setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
@@ -45,7 +44,7 @@ const LaptopPriceInput = (props) => {
     localStorage.setItem("lapPrice", JSON.stringify(LaptopPriceValue));
   }, [LaptopPriceValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -54,7 +53,6 @@ const LaptopPriceInput = (props) => {
         inputValue: LaptopPriceValue,
         isvalid: !LaptopPriceHasError && LaptopPriceIsTouched,
         blur: LaptopPriceBlurHandler,
-        reset: resetLaptopPrice,
       },
     });
   }, [
@@ -63,7 +61,6 @@ const LaptopPriceInput = (props) => {
     LaptopPriceHasError,
     LaptopPriceIsTouched,
     LaptopPriceBlurHandler,
-    resetLaptopPrice,
   ]);
 
   //Variable to change  input classes depending on value validity.

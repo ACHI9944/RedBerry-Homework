@@ -30,7 +30,6 @@ const NumberInput = (props) => {
     valueIsTouched: numberIsTouched,
     valueChangeHandler: numberChangeHandler,
     inputBlurHandler: numberBlurHandler,
-    reset: resetnumber,
     setLocalStorage
   } = UseInputAndSelect(isValueValid);
 
@@ -47,7 +46,7 @@ const NumberInput = (props) => {
     localStorage.setItem("number", JSON.stringify(numberValue));
   }, [numberValue]);
   const { onTakeData } = props;
-//Function to take data to the parent component, including functions to blur and reset
+//Function to take data to the parent component, including functions to blur
   useEffect(() => {
     onTakeData({
       name: "number",
@@ -55,7 +54,6 @@ const NumberInput = (props) => {
         inputValue: numberValue,
         isvalid: !numberHasError && numberIsTouched,
         blur: numberBlurHandler,
-        reset: resetnumber,
       },
     });
   }, [
@@ -64,7 +62,6 @@ const NumberInput = (props) => {
     onTakeData,
     numberIsTouched,
     numberBlurHandler,
-    resetnumber,
   ]);
 
   //Variable to change  input classes depending on value validity.

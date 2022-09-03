@@ -14,7 +14,6 @@ const SelectLapBrand = (props) => {
     valueIsTouched: LapBrandIsTouched,
     valueChangeHandler: LapBrandChangeHandler,
     inputBlurHandler: LapBrandBlurHandler,
-    reset: resetLapBrand,
     setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
 
@@ -31,7 +30,7 @@ const SelectLapBrand = (props) => {
     localStorage.setItem("lapBrand", JSON.stringify(LapBrandValue));
   }, [LapBrandValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -40,7 +39,6 @@ const SelectLapBrand = (props) => {
         inputValue: LapBrandValue,
         isvalid: !LapBrandHasError && LapBrandIsTouched,
         blur: LapBrandBlurHandler,
-        reset: resetLapBrand,
       },
     });
   }, [
@@ -49,7 +47,6 @@ const SelectLapBrand = (props) => {
     LapBrandHasError,
     LapBrandIsTouched,
     LapBrandBlurHandler,
-    resetLapBrand,
   ]);
 
   //Variable to change  input classes depending on value validity.

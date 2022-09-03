@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CpuCoreInput from "./inputs/CpuCoreInput";
 import CpuStreamInput from "./inputs/CpuStreamInput";
@@ -12,11 +12,12 @@ import SelectCpu from "./selects/SelectCpu";
 import SelectLapBrand from "./selects/SelectLapBrand";
 import LaptopPriceInput from "./inputs/LaptopPriceInput";
 import Condition from "./radios/Condition";
-import Button from "../../UI/button/Button";
+import Button from "../../button/Button";
+import Completed from "../../completed/Completed";
 
 const LaptopForm = (props) => {
   const navigate = useNavigate();
-
+  const [modal, setModal] = useState(false);
   const goBack = () => {
     navigate("/add/personform");
   };
@@ -63,10 +64,12 @@ const LaptopForm = (props) => {
       laptopValues.cpustream.isvalid &&
       laptopValues.lapram.isvalid &&
       laptopValues.date.isvalid &&
-      laptopValues.lapPrice.isvalid
+      laptopValues.lapPrice.isvalid &&
+      laptopValues.ConditionRadio.isvalid &&
+      laptopValues.memoryRadio.isvalid
     ) {
+      setModal(true);
       await onTakeData(laptopValues);
-     // localStorage.clear();
       navigate("/added");
     } else {
       laptopValues.img.blur();
@@ -78,11 +81,17 @@ const LaptopForm = (props) => {
       laptopValues.lapram.blur();
       laptopValues.date.blur();
       laptopValues.lapPrice.blur();
+      laptopValues.ConditionRadio.alert();
+      laptopValues.memoryRadio.alert();
     }
+  };
+  const closeModal = () => {
+    setModal(false);
   };
 
   return (
     <Fragment>
+      {modal && <Completed onCloseModal={closeModal} />}
       <Button onBack={goBack} />
       <form className={classes.laptopForm} onSubmit={submitDataHandler}>
         <ImageInput onTakeData={mergeData} />

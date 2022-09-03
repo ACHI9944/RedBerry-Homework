@@ -1,80 +1,73 @@
 import { useCallback, useEffect, useState } from "react";
 import classes from "./Condition.module.css";
 
+//Function to determine value validity
+const isNotEmpty = (value) => {
+  return value.length > 0;
+};
 const Condition = (props) => {
   //Fnction to controll input value and check.
-  const [checked, setChecked] = useState({ new: false, used: false });
   const [value, setValue] = useState("");
+console.log(value)
+  // variable for value validity
+  const valueIsValid = isNotEmpty(value);
+
+  // function for alerting user if radio input is empty
+  const [conditionClass, setMemoryClass] = useState(classes.condition);
+  const alert = useCallback(() => {
+    if (!valueIsValid) {
+      setMemoryClass(classes.invalidCondition);
+    } else {
+      setMemoryClass(classes.condition);
+    }
+  }, [valueIsValid]);
+
   const handleChange = (event) => {
     setValue(event.target.value);
-    setChecked(() => {
-      return {
-        new: false,
-        used: false,
-        [event.target.value]: true,
-      };
-    });
   };
-
-  //Function to reset input
-  const reset = useCallback(() => {
-    setValue("");
-    setChecked(() => {
-      return {
-        new: false,
-        used: false,
-      };
-    });
-  }, []);
 
   //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
-    const storedValues = localStorage.getItem("condition");
+    const storedValues = localStorage.getItem("value");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
-      setChecked(() => {
-        return {
-          new: parsed.new,
-          used: parsed.used,
-        };
-      });
+      setValue(parsed);
     } else return;
-  }, [setChecked]);
+  }, [setValue]);
 
   useEffect(() => {
-    localStorage.setItem("condition", JSON.stringify(checked));
-  }, [checked]);
+    localStorage.setItem("value", JSON.stringify(value));
+  }, [value]);
 
-  //Function to take data to the parent component, including reset
+  //Function to take data to the parent component, including
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
       name: "ConditionRadio",
       value: {
         inputValue: value,
-        reset: reset,
+        isvalid: valueIsValid,
+        alert,
       },
     });
-  }, [value, reset, onTakeData]);
+  }, [value, onTakeData, alert, valueIsValid]);
 
   return (
-    <div className={classes.condition}>
+    <div className={conditionClass}>
       <p>ლეპტოპის მდგომარეობა</p>
       <div className={classes.radios}>
         <input
           type="radio"
           name="condition"
-          value="new"
+          value="ახალი"
           onChange={handleChange}
-          checked={checked.new}
         />
         <label>ახალი</label>
         <input
           type="radio"
           name="condition"
-          value="used"
+          value="მეორადი"
           onChange={handleChange}
-          checked={checked.used}
         />
         <label>მეორადი</label>
       </div>

@@ -29,7 +29,6 @@ const LaptopNameInput = (props) => {
     valueIsTouched: laptopNameIsTouched,
     valueChangeHandler: laptopNameChangeHandler,
     inputBlurHandler: laptopNameBlurHandler,
-    reset: resetLaptopName,
     setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
@@ -46,7 +45,7 @@ const LaptopNameInput = (props) => {
     localStorage.setItem("lapName", JSON.stringify(laptopNameValue));
   }, [laptopNameValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -55,7 +54,6 @@ const LaptopNameInput = (props) => {
         inputValue: laptopNameValue,
         isvalid: !laptopNameHasError && laptopNameIsTouched,
         blur: laptopNameBlurHandler,
-        reset: resetLaptopName,
       },
     });
   }, [
@@ -64,7 +62,6 @@ const LaptopNameInput = (props) => {
     laptopNameHasError,
     laptopNameIsTouched,
     laptopNameBlurHandler,
-    resetLaptopName,
   ]);
 
   //Variable to change  input classes depending on value validity.

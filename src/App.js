@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import Completed from "./completed/Completed";
 import MainNavigation from "./components/MainNavigation";
 import Forms from "./components/forms/Forms";
 import List from '../src/components/list/List'
 import ListItem from '../src/components/list/ListItems'
+import Completed from "./components/completed/Completed";
 
 function App() {
   return (

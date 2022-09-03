@@ -1,0 +1,43 @@
+.layer {
+  width: 100vw;
+  height: 100vh;
+  background-color: #4a4a4a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completed {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.completed img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 90%;
+  height: auto;
+}
+.toList {
+  color: white;
+  width: 9rem;
+  height: 1.7rem;
+  background-color: #62a1eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.backToMain {
+  font-size: 0.8rem;
+  border: none;
+  color: #0089a7;
+  font-weight: bold;
+  background-color: #ffffff;
+  margin: 1rem 0;
+}

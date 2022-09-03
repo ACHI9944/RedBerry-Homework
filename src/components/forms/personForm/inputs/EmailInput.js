@@ -21,7 +21,6 @@ const EmailInput = (props) => {
     valueIsTouched: emailIsTouched,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
     setLocalStorage,
   } = UseInputAndSelect(emailEndsCorrectly);
 
@@ -38,7 +37,7 @@ const EmailInput = (props) => {
     localStorage.setItem("email", JSON.stringify(emailValue));
   }, [emailValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -47,7 +46,6 @@ const EmailInput = (props) => {
         inputValue: emailValue,
         isvalid: !emailHasError && emailIsTouched,
         blur: emailBlurHandler,
-        reset: resetEmail,
       },
     });
   }, [
@@ -56,7 +54,6 @@ const EmailInput = (props) => {
     onTakeData,
     emailIsTouched,
     emailBlurHandler,
-    resetEmail,
   ]);
 
   //Variable to change  input classes depending on value validity.

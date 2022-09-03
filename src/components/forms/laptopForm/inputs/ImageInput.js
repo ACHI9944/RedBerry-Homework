@@ -21,11 +21,6 @@ const ImageInput = (props) => {
   // variable to controll if user checked input or not
   const isvalid = isNotEmpty(img);
   
-  //Function to reset input
-  const reset = useCallback((event) => {
-    event.preventDefault();
-    setImg("");
-  }, []);
 
   //Function to change image class on submitting form if input is invalid
   const inavlidClass = classes.invalidImage;
@@ -37,11 +32,8 @@ const ImageInput = (props) => {
     },
     [inavlidClass]
   );
-  //function for removing uploaded photo
-  const resetImg = () => {
-    setImg("");
-  };
-  //Function to take data to the parent component, including functions to blur and reset
+ 
+  //Function to take data to the parent component, including functions to blur and 
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -50,10 +42,9 @@ const ImageInput = (props) => {
         inputValue: img,
         isvalid: isvalid,
         blur: alertImg,
-        reset: reset,
       },
     });
-  }, [img, isvalid, alertImg, reset, onTakeData]);
+  }, [img, isvalid, alertImg, onTakeData]);
 
   const beforeUploadImg = (
     <div className={imgClass}>

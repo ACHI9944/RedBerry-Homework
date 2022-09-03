@@ -29,7 +29,6 @@ const LapRamInput = (props) => {
     valueIsTouched: LapRamIsTouched,
     valueChangeHandler: LapRamChangeHandler,
     inputBlurHandler: LapRamBlurHandler,
-    reset: resetLapRam,
     setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
@@ -46,7 +45,7 @@ const LapRamInput = (props) => {
     localStorage.setItem("lapRam", JSON.stringify(LapRamValue));
   }, [LapRamValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -55,7 +54,6 @@ const LapRamInput = (props) => {
         inputValue: LapRamValue,
         isvalid: !LapRamHasError && LapRamIsTouched,
         blur: LapRamBlurHandler,
-        reset: resetLapRam,
       },
     });
   }, [
@@ -64,7 +62,6 @@ const LapRamInput = (props) => {
     LapRamHasError,
     LapRamIsTouched,
     LapRamBlurHandler,
-    resetLapRam,
   ]);
 
   //Variable to change  input classes depending on value validity.

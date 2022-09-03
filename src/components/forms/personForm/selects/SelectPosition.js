@@ -14,7 +14,6 @@ const SelectPosition = (props) => {
     valueIsTouched: positionIsTouched,
     inputBlurHandler: positionBlurHandler,
     valueHasError: positionHasError,
-    reset: resetPosition,
     setLocalStorage,
   } = UseInputAndSelect(isNotEmpty);
 
@@ -31,7 +30,7 @@ const SelectPosition = (props) => {
     localStorage.setItem("position", JSON.stringify(positionValue));
   }, [positionValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -40,7 +39,6 @@ const SelectPosition = (props) => {
         inputValue: positionValue,
         isvalid: !positionHasError && positionIsTouched,
         blur: positionBlurHandler,
-        reset: resetPosition,
       },
     });
   }, [
@@ -49,7 +47,6 @@ const SelectPosition = (props) => {
     onTakeData,
     positionIsTouched,
     positionBlurHandler,
-    resetPosition,
   ]);
 
   //Variable to change  input classes depending on value validity.

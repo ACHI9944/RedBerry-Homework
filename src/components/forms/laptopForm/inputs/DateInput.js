@@ -28,7 +28,6 @@ const DateInput = (props) => {
     valueIsTouched: dateIsTouched,
     valueChangeHandler: dateChangeHandler,
     inputBlurHandler: dateBlurHandler,
-    reset: resetDate,
     setLocalStorage,
   } = UseInputAndSelect(isValueValid);
 
@@ -45,7 +44,7 @@ const DateInput = (props) => {
     localStorage.setItem("date", JSON.stringify(dateValue));
   }, [dateValue]);
 
-  //Function to take data to the parent component, including functions to blur and reset
+  //Function to take data to the parent component, including functions to blur and 
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -54,7 +53,6 @@ const DateInput = (props) => {
         inputValue: dateValue,
         isvalid: !dateHasError && dateIsTouched,
         blur: dateBlurHandler,
-        reset: resetDate,
       },
     });
   }, [
@@ -63,7 +61,6 @@ const DateInput = (props) => {
     dateHasError,
     dateIsTouched,
     dateBlurHandler,
-    resetDate,
   ]);
 
   //Variable to change  input classes depending on value validity.
