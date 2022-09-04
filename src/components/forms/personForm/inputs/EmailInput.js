@@ -25,11 +25,12 @@ const EmailInput = (props) => {
   } = UseInputAndSelect(emailEndsCorrectly);
 
   //Using useffects to put input value in local storage and take it out when page refreshed
-  useEffect(() => {
+  useEffect( () => {
+
     const storedValues = localStorage.getItem("email");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
-      setLocalStorage(parsed);
+     setLocalStorage(parsed);
     } else return;
   }, [setLocalStorage]);
 
@@ -37,7 +38,7 @@ const EmailInput = (props) => {
     localStorage.setItem("email", JSON.stringify(emailValue));
   }, [emailValue]);
 
-  //Function to take data to the parent component, including functions to blur
+  //Function to take data to the parent component, including function to blur
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({

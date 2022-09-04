@@ -49,7 +49,7 @@ const CpuStreamInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "cpustream",
+      name: "laptop_cpu_threads",
       value: {
         inputValue: CpuStreamValue,
         isvalid: !CpuStreamHasError && CpuStreamIsTouched,

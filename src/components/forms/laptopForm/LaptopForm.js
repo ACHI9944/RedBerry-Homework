@@ -28,17 +28,17 @@ const LaptopForm = (props) => {
 
   //State for gathering all data from component inputs
   const [laptopValues, setlaptopValues] = useState({
-    img: {},
-    lapName: {},
-    LapBrand: {},
-    cpu: {},
-    cpucore: {},
-    cpustream: {},
-    lapram: {},
-    date: {},
-    lapPrice: {},
-    memoryRadio: {},
-    ConditionRadio: {},
+    laptop_image: '',
+    laptop_name: '',
+    laptop_brand_id: '',
+    laptop_cpu: '',
+    laptop_cpu_cores: '',
+    laptop_cpu_threads: '',
+    laptop_ram: '',
+    laptop_hard_drive_type: '',
+    laptop_state: '',
+    laptop_purchase_date: '',
+    laptop_price: '',
   });
 
   //function for merging incoming data to existing data in state
@@ -53,7 +53,7 @@ const LaptopForm = (props) => {
   const { onTakeData, lapBrands, Cpus } = props;
 
   //function for submitting form. to check validity of every single input
-  const submitDataHandler = async (event) => {
+  const submitDataHandler = (event) => {
     event.preventDefault();
     if (
       laptopValues.img.isvalid &&
@@ -69,8 +69,8 @@ const LaptopForm = (props) => {
       laptopValues.memoryRadio.isvalid
     ) {
       setModal(true);
-      await onTakeData(laptopValues);
-      navigate("/added");
+      onTakeData(laptopValues);
+      /* navigate("/added"); */
     } else {
       laptopValues.img.blur();
       laptopValues.lapName.blur();

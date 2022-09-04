@@ -61,7 +61,7 @@ const SelectLapBrand = (props) => {
   return (
     <select
       className={selectClasses}
-      name="lapBrand"
+      name="laptop_brand_id"
       defaultValue={defaultvalue}
       onChange={LapBrandChangeHandler}
       onBlur={LapBrandBlurHandler}

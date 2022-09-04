@@ -40,9 +40,10 @@ const UseInputAndSelect = (validateValue) => {
   const valueIsValid = validateValue(inputState.value);
   const valueHasError = !valueIsValid && inputState.isTouched;
 
+
+
   //using useEffect to avoid unnecessary rerenderings while typing
   const [inputHasError, setInputHasError] = useState(false);
-
   useEffect(() => {
     const identifier = setTimeout(() => {
       setInputHasError(valueHasError);

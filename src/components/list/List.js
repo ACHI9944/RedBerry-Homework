@@ -2,80 +2,21 @@ import { useNavigate } from "react-router-dom";
 import classes from "./List.module.css";
 import laptop from "../../assets/pictures/laptop3.png";
 import ListItems from "./ListItems";
+import { Fragment, useEffect, useState } from "react";
+import Button from "../button/Button";
 
-/* import { useEffect, useState } from "react"; */
-
-const DUMMYLIST = [
-  {
-    id: "i1",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i2",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i3",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i4",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i5",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i6",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i7",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-  {
-    id: "i8",
-    img: laptop,
-    fullname: "არჩილი ახვლედიანი",
-    name: "asus core ie7",
-    more: "მეტის ნახვა",
-  },
-];
-
-/* const url =
-  "https://pcfy.redberryinternship.ge/api/laptops?token=aec11cf7c5d14402ee5d8e97bd29dfb6"; */
+const url =
+  "https://pcfy.redberryinternship.ge/api/laptops/?token=29a08a8a214129fffd8bcd90030906a6";
 
 const List = () => {
-  //const [data, setData] = useState([]);
-  const navigate = useNavigate();
   const icon = <ion-icon name="chevron-back-outline"></ion-icon>;
+  const navigate = useNavigate();
   const goBack = () => {
     navigate("/main");
   };
+  const [data, setData] = useState([]);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -86,27 +27,28 @@ const List = () => {
         console.warn(e);
       }
     };
-
     fetchData();
-  }, []); */
 
+  }, []);
   return (
-    <div className={classes.layer}>
-      <button onClick={goBack}>{icon}</button>
-      <h4>ჩანაწერების სია</h4>
+    <Fragment>
+      <Button onBack={goBack}>{icon}</Button>
+      <div className={classes.layer}>
+        <h4>ჩანაწერების სია</h4>
 
-      <ul className={classes.laptopList}>
-        {DUMMYLIST.map((item) => (
-          <ListItems
-            key={item.id}
-            img={item.img}
-            fullname={item.fullname}
-            name={item.name}
-            more={item.more}
-          />
-        ))}
-      </ul>
-    </div>
+        <ul className={classes.laptopList}>
+          {data.map((item) => (
+            <ListItems
+              key={item.laptop.id}
+              img={item.laptop.img}
+              fullname={`${item.user.name} ${item.user.surname}`}
+              name={item.laptop.name}
+              more={item.more}
+            />
+          ))}
+        </ul>
+      </div>
+    </Fragment>
   );
 };
 

@@ -49,7 +49,7 @@ const FirstNameInput = (props) => {
   //Function to take data to the parent component, including functions to blur
   useEffect(() => {
     onTakeData({
-      name: "firstname",
+      name: "name",
       value: {
         inputValue: firstNameValue,
         isvalid: !firstNameHasError && firstnameIsTouched,

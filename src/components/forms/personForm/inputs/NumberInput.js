@@ -49,9 +49,9 @@ const NumberInput = (props) => {
 //Function to take data to the parent component, including functions to blur
   useEffect(() => {
     onTakeData({
-      name: "number",
+      name: "phone_number",
       value: {
-        inputValue: numberValue,
+        inputValue: +numberValue,
         isvalid: !numberHasError && numberIsTouched,
         blur: numberBlurHandler,
       },
@@ -69,7 +69,7 @@ const NumberInput = (props) => {
 
   return (
     <div className={numberClasses}>
-      <label htmlFor="email">ტელეფონის ნომერი</label>
+      <label htmlFor="number">ტელეფონის ნომერი</label>
 
       <input
         type="text"

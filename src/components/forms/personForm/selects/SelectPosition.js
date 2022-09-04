@@ -34,7 +34,7 @@ const SelectPosition = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "position",
+      name: "position_id",
       value: {
         inputValue: positionValue,
         isvalid: !positionHasError && positionIsTouched,
@@ -66,6 +66,9 @@ const SelectPosition = (props) => {
       onChange={positionChangeHandler}
       onBlur={positionBlurHandler}
     >
+      <option value="პოზიცია" disabled hidden>
+        პოზიცია
+      </option>
       {props.positions.map((item) => (
         <OptionPosition key={item.id} value={item.name} />
       ))}

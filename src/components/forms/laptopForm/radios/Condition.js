@@ -42,7 +42,7 @@ const Condition = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "ConditionRadio",
+      name: "laptop_state",
       value: {
         inputValue: value,
         isvalid: valueIsValid,

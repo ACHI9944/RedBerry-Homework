@@ -34,7 +34,7 @@ const SelectCpu = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "cpu",
+      name: "laptop_cpu",
       value: {
         inputValue: CpuValue,
         isvalid: !CpusHasError && CpuIsTouched,

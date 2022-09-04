@@ -48,7 +48,7 @@ const DateInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "date",
+      name: "laptop_purchase_date",
       value: {
         inputValue: dateValue,
         isvalid: !dateHasError && dateIsTouched,

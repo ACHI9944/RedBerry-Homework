@@ -48,7 +48,7 @@ const LaptopPriceInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "lapPrice",
+      name: "laptop_price",
       value: {
         inputValue: LaptopPriceValue,
         isvalid: !LaptopPriceHasError && LaptopPriceIsTouched,

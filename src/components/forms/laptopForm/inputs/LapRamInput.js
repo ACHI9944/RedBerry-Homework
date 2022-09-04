@@ -49,7 +49,7 @@ const LapRamInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "lapram",
+      name: "laptop_ram",
       value: {
         inputValue: LapRamValue,
         isvalid: !LapRamHasError && LapRamIsTouched,

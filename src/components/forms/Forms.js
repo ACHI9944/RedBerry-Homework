@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import FormLayout from "../formLayout/FormLayout";
 import LaptopForm from "./laptopForm/LaptopForm";
 import PersonForm from "./personForm/PersonForm";
 
 const Forms = () => {
+  const DOMAIN =
+    "https://pcfy.redberryinternship.ge/api/laptops?token=3611f593d38f29d39f136e29ea6ccce0.json";
+  const navigate = useNavigate();
   const lapBrands = [
     {
       id: 1,
@@ -31,40 +34,7 @@ const Forms = () => {
       name: "Acer",
     },
   ];
-  const team = [
-    {
-      id: 1,
-      name: "დეველოპერი",
-    },
-    {
-      id: 2,
-      name: "HR",
-    },
-    {
-      id: 3,
-      name: "გაყიდვები",
-    },
-    {
-      id: 4,
-      name: "დიზაინი",
-    },
-    {
-      id: 5,
-      name: "მარკეგინგი",
-    },
-  ];
-  const positions = [
-    {
-      id: 1,
-      name: "ინტერნი",
-      teams_id: 1,
-    },
-    {
-      id: 2,
-      name: "HR ბიზნეს დეველოპერი",
-      teams_id: 3,
-    },
-  ];
+
   const Cpus = [
     {
       id: 1,
@@ -88,65 +58,76 @@ const Forms = () => {
     },
   ];
   const [values, setValues] = useState({
-    firstname: {},
-    lastName: {},
-    team: {},
-    position: {},
-    email: {},
-    number: {},
-    lapName: {},
-    LapBrand: {},
-    cpu: {},
-    cpucore: {},
-    cpustream: {},
-    lapram: {},
-    date: {},
-    lapPrice: {},
-    memoryRadio: {},
-    ConditionRadio: {},
+    name: "",
+    surname: "",
+    team_id: "",
+    position_id: "",
+    email: "",
+    token: "3611f593d38f29d39f136e29ea6ccce0",
+    phone_number: "",
+    laptop_name: "",
+    laptop_image: "",
+    laptop_brand_id: "",
+    laptop_cpu: "",
+    laptop_cpu_cores: "",
+    laptop_cpu_threads: "",
+    laptop_ram: "",
+    laptop_hard_drive_type: "",
+    laptop_state: "",
+    laptop_purchase_date: "",
+    laptop_price: "",
   });
 
-  
+  /* useEffect(() => {
+    if (Object.values(values).every((x) => x)) {
+      navigate("/added");
+    }
+  }, [values, navigate]); */
+
   useEffect(() => {
     const storedValues = localStorage.getItem("allValues");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
       setValues(parsed);
     } else return;
-  }, [setValues,]);
+  }, [setValues]);
 
   useEffect(() => {
     localStorage.setItem("allValues", JSON.stringify(values));
   }, [values]);
 
-
-  const onTakeData =  useCallback(
+  const onTakeData = useCallback(
     (broughtValue) => {
       for (const key in broughtValue) {
         setValues((previousValues) => ({
           ...previousValues,
           [key]: broughtValue[key].inputValue,
         }));
-      
       }
     },
     [setValues]
   );
-  console.log(values);
 
+  /*   const ait = async () => {
+    await fetch(
+      "https://pcfy.redberryinternship.ge/api/laptops?token=3611f593d38f29d39f136e29ea6ccce0.",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: values.name,
+          surname: values.surname,
+        }),
+        headers: { "content-Type": "application/json" },
+      }
+    );
+  }; */
   return (
     <FormLayout>
       <Routes>
         <Route path="/" element={<Navigate to="personform" />} />
         <Route
           path="personform"
-          element={
-            <PersonForm
-              team={team}
-              positions={positions}
-              onTakeData={onTakeData}
-            />
-          }
+          element={<PersonForm onTakeData={onTakeData} />}
         />
         <Route
           path="laptopForm"
@@ -159,6 +140,7 @@ const Forms = () => {
           }
         />
       </Routes>
+      <button /* onClick={ait} */>ait</button>
     </FormLayout>
   );
 };

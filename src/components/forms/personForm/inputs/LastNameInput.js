@@ -50,7 +50,7 @@ const LastNameInput = (props) => {
   //Function to take data to the parent component, including functions to blur
   useEffect(() => {
     onTakeData({
-      name: "lastName",
+      name: "surname",
       value: {
         inputValue: lastNameValue,
         isvalid: !lastNameHasError && lastnameIsTouched,

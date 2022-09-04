@@ -49,7 +49,7 @@ const CpuCoreInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "cpucore",
+      name: "laptop_cpu_cores",
       value: {
         inputValue: CpuCoreValue,
         isvalid: !CpuCoreHasError && CpuCoreIsTouched,

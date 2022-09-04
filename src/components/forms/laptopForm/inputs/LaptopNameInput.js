@@ -49,7 +49,7 @@ const LaptopNameInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "lapName",
+      name: "laptop_name",
       value: {
         inputValue: laptopNameValue,
         isvalid: !laptopNameHasError && laptopNameIsTouched,

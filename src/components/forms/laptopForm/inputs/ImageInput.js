@@ -20,7 +20,6 @@ const ImageInput = (props) => {
   };
   // variable to controll if user checked input or not
   const isvalid = isNotEmpty(img);
-  console.log(img)
 
   //Function to change image class on submitting form if input is invalid
   const inavlidClass = classes.invalidImage;

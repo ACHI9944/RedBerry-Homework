@@ -45,7 +45,7 @@ const MemoryRadio = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "memoryRadio",
+      name: "laptop_hard_drive_type",
       value: {
         inputValue: value,
         isvalid: valueIsValid,
