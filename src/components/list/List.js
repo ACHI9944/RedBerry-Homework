@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./List.module.css";
-import laptop from "../../assets/pictures/laptop3.png";
 import ListItems from "./ListItems";
 import { Fragment, useEffect, useState } from "react";
 import Button from "../button/Button";

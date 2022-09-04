@@ -8,38 +8,37 @@ const isNotEmpty = (value) => {
 
 const MemoryRadio = (props) => {
   //Fnction to controll input value
-  const [value, setValue] = useState("");
+  const [memoryValue, setMemoryValue] = useState("");
 
   // variable for value validity
-  const valueIsValid = isNotEmpty(value);
+  const valueIsValid = isNotEmpty(memoryValue);
 
   // function for alerting user if radio input is empty
-  const [memoryClass , setMemoryClass] = useState(classes.memoryRadio)
+  const [memoryClass, setMemoryClass] = useState(classes.memoryRadio);
   const alert = useCallback(() => {
-    if(!valueIsValid) {
-      setMemoryClass(classes.invalidmemoryRadio)
+    if (!valueIsValid) {
+      setMemoryClass(classes.invalidmemoryRadio);
     } else {
-      setMemoryClass(classes.memoryRadio)
+      setMemoryClass(classes.memoryRadio);
     }
-  },[valueIsValid])
+  }, [valueIsValid]);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setMemoryValue(event.target.value);
   };
-  
 
   //Using useffects to put input value in local storage and take it out when page refreshed
   useEffect(() => {
     const storedValues = localStorage.getItem("memoryType");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
-      setValue(parsed);
+      setMemoryValue(parsed);
     } else return;
-  }, [setValue]);
+  }, [setMemoryValue]);
 
   useEffect(() => {
-    localStorage.setItem("memoryType", JSON.stringify(value));
-  }, [value]);
+    localStorage.setItem("memoryType", JSON.stringify(memoryValue));
+  }, [memoryValue]);
 
   //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
@@ -47,21 +46,48 @@ const MemoryRadio = (props) => {
     onTakeData({
       name: "laptop_hard_drive_type",
       value: {
-        inputValue: value,
+        inputValue: memoryValue,
         isvalid: valueIsValid,
         alert,
       },
     });
-  }, [value, onTakeData, valueIsValid,alert]);
+  }, [memoryValue, onTakeData, valueIsValid, alert]);
 
-  
+  // Function for getting checked value not to lose checked after refreshing
+  const checkChecker = (value) => {
+    let checkedSsd = false;
+    let checkedHdd = false;
+    if (value === "ssd") {
+      checkedSsd = true;
+      checkedHdd = false;
+    } else if (value === "hdd") {
+      checkedHdd = true;
+      checkedSsd = false;
+    }
+    return { checkedSsd, checkedHdd };
+  };
+
+  const { checkedSsd, checkedHdd } = checkChecker(memoryValue);
+
   return (
     <div className={memoryClass}>
       <p>მეხსიერების ტიპი</p>
       <div className={classes.radios}>
-        <input type="radio" name="memory" value="ssd" onChange={handleChange} />
+        <input
+          type="radio"
+          name="memory"
+          value="ssd"
+          onChange={handleChange}
+          checked={checkedSsd}
+        />
         <label>SSD</label>
-        <input type="radio" name="memory" value="hdd" onChange={handleChange} />
+        <input
+          type="radio"
+          name="memory"
+          value="hdd"
+          onChange={handleChange}
+          checked={checkedHdd}
+        />
         <label>HDD</label>
       </div>
     </div>

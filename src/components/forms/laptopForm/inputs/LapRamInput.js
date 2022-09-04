@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import classes from "./LapRamInput.module.css";
 
 //function for Checking input validity
@@ -51,7 +51,7 @@ const LapRamInput = (props) => {
     onTakeData({
       name: "laptop_ram",
       value: {
-        inputValue: LapRamValue,
+        inputValue: +LapRamValue,
         isvalid: !LapRamHasError && LapRamIsTouched,
         blur: LapRamBlurHandler,
       },

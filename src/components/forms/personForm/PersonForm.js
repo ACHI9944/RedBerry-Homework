@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../button/Button";
-import useFetchDummy from "../hooks/useFetchDummy";
+import useFetchDummy from "../../hooks/useFetchDummy";
 import EmailInput from "./inputs/EmailInput";
 import FirstNameInput from "./inputs/FirstNameInput";
 import LastNameInput from "./inputs/LastNameInput";
@@ -10,6 +10,7 @@ import classes from "./PersonForm.module.css";
 import SelectPosition from "./selects/SelectPosition";
 import SelectTeam from "./selects/SelectTeam";
 
+//Links from api
 const teamsUrl = "https://pcfy.redberryinternship.ge/api/teams";
 const positionsUrl = "https://pcfy.redberryinternship.ge/api/positions";
 
@@ -31,6 +32,7 @@ const PersonForm = (props) => {
     email: "",
     phone_number: "",
   });
+
 
   //function for merging incoming data to existing data in state
   const mergeData = useCallback(
@@ -81,6 +83,7 @@ const PersonForm = (props) => {
   };
   const positionsData = positionChangeHandler(personValues.team_id.inputValue);
 
+  
   return (
     <Fragment>
       <Button onBack={goBack} />

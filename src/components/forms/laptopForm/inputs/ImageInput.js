@@ -2,7 +2,7 @@ import React, { Fragment, useCallback, useEffect, useState } from "react";
 import classes from "./ImageInput.module.css";
 import alertImage from "../../../../assets/pictures/alertimg.PNG";
 import doneImg from "../../../../assets/pictures/doneImg.PNG";
-import UseImgSizeCalc from "../../useHook/UseImgSizeCalc";
+import UseImgSizeCalc from "../../../hooks/UseImgSizeCalc";
 
 //function for Checking input validity
 const isNotEmpty = (value) => {
@@ -36,7 +36,7 @@ const ImageInput = (props) => {
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "img",
+      name: "laptop_image",
       value: {
         inputValue: img,
         isvalid: isvalid,
@@ -54,7 +54,7 @@ const ImageInput = (props) => {
       <input id="file-upload" type="file" onChange={imageChangeHandler}></input>
     </div>
   );
-
+  
   return (
     <Fragment>
       {!img && beforeUploadImg}

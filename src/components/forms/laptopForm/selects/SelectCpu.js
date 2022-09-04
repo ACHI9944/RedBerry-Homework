@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import OptionCpu from "./OptionCpu";
 import classes from "./SelectCpu.module.css";
 
@@ -14,7 +14,7 @@ const SelectCpu = (props) => {
     valueIsTouched: CpuIsTouched,
     valueChangeHandler: CpusChangeHandler,
     inputBlurHandler: CpusBlurHandler,
-    setLocalStorage,
+    setLocalStorage
   } = UseInputAndSelect(isNotEmpty);
 
   //Using useffects to put input value in local storage and take it out when page refreshed
@@ -30,6 +30,8 @@ const SelectCpu = (props) => {
     localStorage.setItem("cpuValue", JSON.stringify(CpuValue));
   }, [CpuValue]);
 
+
+
   //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
@@ -41,29 +43,24 @@ const SelectCpu = (props) => {
         blur: CpusBlurHandler,
       },
     });
-  }, [
-    onTakeData,
-    CpuValue,
-    CpusHasError,
-    CpuIsTouched,
-    CpusBlurHandler,
-  ]);
+  }, [onTakeData, CpuValue, CpusHasError, CpuIsTouched, CpusBlurHandler]);
 
   //Variable to change  input classes depending on value validity.
   const selectClasses = CpusHasError ? classes.invalidCpus : classes.Cpus;
 
-  //setting variable to give selects position selected in localStorage
-  const storedValues = localStorage.getItem("cpuValue");
-  const parsed = JSON.parse(storedValues);
-  const defaultvalue = parsed ? parsed : "CPU";
+  //Variable to set starting value
+  const defaultValue = CpuValue? CpuValue : 'CPU'
   return (
     <select
       className={selectClasses}
       name="CPU"
-      defaultValue={defaultvalue}
+      value={defaultValue}
       onChange={CpusChangeHandler}
       onBlur={CpusBlurHandler}
     >
+      <option value="CPU" disabled hidden>
+        CPU
+      </option>
       {props.Cpus.map((item) => (
         <OptionCpu key={item.id} value={item.name} />
       ))}

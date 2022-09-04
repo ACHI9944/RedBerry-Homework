@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import OptionPosition from "./OptionPosition";
 import classes from "./SelectTeamAndPos.module.css";
 
@@ -7,6 +7,9 @@ import classes from "./SelectTeamAndPos.module.css";
 const isNotEmpty = (value) => value.trim().length > 0;
 
 const SelectPosition = (props) => {
+  //Destructuring props
+  const { onTakeData, positions } = props;
+
   //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: positionValue,
@@ -30,13 +33,24 @@ const SelectPosition = (props) => {
     localStorage.setItem("position", JSON.stringify(positionValue));
   }, [positionValue]);
 
+  // function to determine position id
+  const idFinder = (value) => {
+    const idObj = positions.filter((item) => item.name === value);
+    if (idObj.length > 0) {
+      return idObj[0].id;
+    } else {
+      return "";
+    }
+  };
+  
+  const identifiedId = idFinder(positionValue);
+
   //Function to take data to the parent component, including functions to blur
-  const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
       name: "position_id",
       value: {
-        inputValue: positionValue,
+        inputValue: identifiedId,
         isvalid: !positionHasError && positionIsTouched,
         blur: positionBlurHandler,
       },
@@ -47,6 +61,7 @@ const SelectPosition = (props) => {
     onTakeData,
     positionIsTouched,
     positionBlurHandler,
+    identifiedId,
   ]);
 
   //Variable to change  input classes depending on value validity.
@@ -54,19 +69,18 @@ const SelectPosition = (props) => {
     ? classes.invalidSelect
     : classes.select;
 
-  //setting variable to give selects position selected in localStorage
-  const storedValues = localStorage.getItem("position");
-  const parsed = JSON.parse(storedValues);
-  const defaultvalue = parsed ? parsed : "პოზიცია";
+    //Variable to set starting value
+  const defaultValue = positionValue? positionValue : 'პოზიცია'
+
   return (
     <select
       className={selectClasses}
       name="pos"
-      defaultValue={defaultvalue}
+      value={defaultValue}
       onChange={positionChangeHandler}
       onBlur={positionBlurHandler}
     >
-      <option value="პოზიცია" disabled hidden>
+      <option value="pozition" disabled hidden>
         პოზიცია
       </option>
       {props.positions.map((item) => (

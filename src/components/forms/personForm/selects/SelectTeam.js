@@ -1,5 +1,5 @@
-import { Fragment, useEffect } from "react";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import { useEffect, useState } from "react";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import OptionTeam from "./OptionTeam";
 import classes from "./SelectTeamAndPos.module.css";
 
@@ -7,6 +7,9 @@ import classes from "./SelectTeamAndPos.module.css";
 const isNotEmpty = (value) => value.trim().length > 0;
 
 const SelectTeam = (props) => {
+  //Destructuring props
+  const { onTakeData, team } = props;
+
   //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: teamValue,
@@ -30,50 +33,52 @@ const SelectTeam = (props) => {
     localStorage.setItem("team", JSON.stringify(teamValue));
   }, [teamValue]);
 
-  // function to controll team id, then to controll positions
-  const teamId = (value) => {
-    if (value === "დეველოპერი") {
-      return 1;
-    } else if (value === "HR") {
-      return 2;
-    } else if (value === "გაყიდვები") {
-      return 3;
-    } else if (value === "დიზაინი") {
-      return 4;
-    } else if (value === "მარკეტინგი") {
-      return 5;
-    } else return;
+  // function to determine team id
+  const idFinder = (value) => {
+    const idObj = team.filter((item) => item.name === value);
+    if (idObj.length > 0) {
+      return idObj[0].id;
+    } else {
+      return "";
+    }
   };
+  const identifiedId = idFinder(teamValue);
 
   //Function to take data to the parent component, including functions to blur
-  const { onTakeData } = props;
+
   useEffect(() => {
     onTakeData({
       name: "team_id",
       value: {
-        inputValue: teamId(teamValue),
+        inputValue: identifiedId,
         isvalid: !teamHasError && teamIsTouched,
         blur: teamBlurHandler,
       },
     });
-  }, [teamHasError, teamValue, onTakeData, teamIsTouched, teamBlurHandler]);
+  }, [
+    teamHasError,
+    teamValue,
+    onTakeData,
+    teamIsTouched,
+    teamBlurHandler,
+    identifiedId,
+  ]);
 
   //Variable to change  input classes depending on value validity.
   const selectClasses = teamHasError ? classes.invalidSelect : classes.select;
 
-  //setting variable to give selects position selected in localStorage
-  const storedValues = localStorage.getItem("position");
-  const parsed = JSON.parse(storedValues);
-  const defaultvalue = parsed ? parsed : "თიმი";
+  //Variable to set starting value
+  const defaultValue = teamValue? teamValue : 'თიმი'
+
   return (
     <select
       className={selectClasses}
       name="Team"
-      defaultValue={defaultvalue}
+      value={defaultValue}
       onChange={teamChangeHandler}
       onBlur={teamBlurHandler}
     >
-      <option value="თიმი" disabled hidden>
+      <option id="Team" disabled hidden>
         თიმი
       </option>
       {props.team.map((item) => (

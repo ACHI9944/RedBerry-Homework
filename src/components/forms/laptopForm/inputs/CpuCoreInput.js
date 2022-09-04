@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import classes from "./CpuCoreInput.module.css";
 
 //function for Checking input validity
@@ -51,7 +51,7 @@ const CpuCoreInput = (props) => {
     onTakeData({
       name: "laptop_cpu_cores",
       value: {
-        inputValue: CpuCoreValue,
+        inputValue: +CpuCoreValue,
         isvalid: !CpuCoreHasError && CpuCoreIsTouched,
         blur: CpuCoreBlurHandler,
       },

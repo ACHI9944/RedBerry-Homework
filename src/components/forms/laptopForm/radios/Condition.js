@@ -7,9 +7,9 @@ const isNotEmpty = (value) => {
 };
 const Condition = (props) => {
   //Fnction to controll input value and check.
-  const [value, setValue] = useState("");
+  const [conditionvalue, setConditionValue] = useState("");
   // variable for value validity
-  const valueIsValid = isNotEmpty(value);
+  const valueIsValid = isNotEmpty(conditionvalue);
 
   // function for alerting user if radio input is empty
   const [conditionClass, setMemoryClass] = useState(classes.condition);
@@ -22,7 +22,7 @@ const Condition = (props) => {
   }, [valueIsValid]);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setConditionValue(event.target.value);
   };
 
   //Using useffects to put input value in local storage and take it out when page refreshed
@@ -30,13 +30,13 @@ const Condition = (props) => {
     const storedValues = localStorage.getItem("value");
     if (storedValues) {
       const parsed = JSON.parse(storedValues);
-      setValue(parsed);
+      setConditionValue(parsed);
     } else return;
-  }, [setValue]);
+  }, [setConditionValue]);
 
   useEffect(() => {
-    localStorage.setItem("value", JSON.stringify(value));
-  }, [value]);
+    localStorage.setItem("value", JSON.stringify(conditionvalue));
+  }, [conditionvalue]);
 
   //Function to take data to the parent component, including
   const { onTakeData } = props;
@@ -44,13 +44,29 @@ const Condition = (props) => {
     onTakeData({
       name: "laptop_state",
       value: {
-        inputValue: value,
+        inputValue: conditionvalue,
         isvalid: valueIsValid,
         alert,
       },
     });
-  }, [value, onTakeData, alert, valueIsValid]);
+  }, [conditionvalue, onTakeData, alert, valueIsValid]);
 
+
+  // Function for getting checked value not to lose checked after refreshing
+  const checkChecker = (value) => {
+    let checkedNew = false;
+    let checkedUsed = false;
+    if (value === "ახალი") {
+      checkedNew = true;
+      checkedUsed = false;
+    } else if (value === "მეორადი") {
+      checkedUsed = true;
+      checkedNew = false;
+    }
+    return { checkedNew, checkedUsed };
+  };
+
+  const {checkedNew , checkedUsed} = checkChecker(conditionvalue)
   return (
     <div className={conditionClass}>
       <p>ლეპტოპის მდგომარეობა</p>
@@ -60,6 +76,7 @@ const Condition = (props) => {
           name="condition"
           value="ახალი"
           onChange={handleChange}
+          checked={checkedNew}
         />
         <label>ახალი</label>
         <input
@@ -67,6 +84,7 @@ const Condition = (props) => {
           name="condition"
           value="მეორადი"
           onChange={handleChange}
+          checked={checkedUsed}
         />
         <label>მეორადი</label>
       </div>

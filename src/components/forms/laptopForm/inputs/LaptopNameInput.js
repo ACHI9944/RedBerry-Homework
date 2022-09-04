@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import classes from "./LaptopNameInput.module.css";
 
 //function for Checking input validity

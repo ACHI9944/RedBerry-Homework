@@ -1,12 +1,14 @@
 import classes from "./SelectLapBrand.module.css";
 import OptionLapBrand from "./OptionLapBrand";
-import UseInputAndSelect from "../../useHook/UseInputAndSelect";
 import { useEffect } from "react";
+import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 
 //function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
 
 const SelectLapBrand = (props) => {
+  const { onTakeData, lapBrands } = props;
+
   //Destructuring data from custom hook 'UseInputAndSelect'
   const {
     value: LapBrandValue,
@@ -14,7 +16,7 @@ const SelectLapBrand = (props) => {
     valueIsTouched: LapBrandIsTouched,
     valueChangeHandler: LapBrandChangeHandler,
     inputBlurHandler: LapBrandBlurHandler,
-    setLocalStorage,
+    setLocalStorage
   } = UseInputAndSelect(isNotEmpty);
 
   //Using useffects to put input value in local storage and take it out when page refreshed
@@ -30,13 +32,23 @@ const SelectLapBrand = (props) => {
     localStorage.setItem("lapBrand", JSON.stringify(LapBrandValue));
   }, [LapBrandValue]);
 
+  // function to determine team id
+  const idFinder = (value) => {
+    const idObj = lapBrands.filter((item) => item.name === value);
+    if (idObj.length > 0) {
+      return idObj[0].id;
+    } else {
+      return "";
+    }
+  };
+  const identifiedId = idFinder(LapBrandValue);
+
   //Function to take data to the parent component, including functions to blur
-  const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
-      name: "LapBrand",
+      name: "laptop_brand_id",
       value: {
-        inputValue: LapBrandValue,
+        inputValue: identifiedId,
         isvalid: !LapBrandHasError && LapBrandIsTouched,
         blur: LapBrandBlurHandler,
       },
@@ -47,6 +59,7 @@ const SelectLapBrand = (props) => {
     LapBrandHasError,
     LapBrandIsTouched,
     LapBrandBlurHandler,
+    identifiedId,
   ]);
 
   //Variable to change  input classes depending on value validity.
@@ -54,18 +67,19 @@ const SelectLapBrand = (props) => {
     ? classes.invalidLapBrand
     : classes.LapBrand;
 
-  //setting variable to give selects position selected in localStorage
-  const storedValues = localStorage.getItem("lapBrand");
-  const parsed = JSON.parse(storedValues);
-  const defaultvalue = parsed ? parsed : "ლეპტოპის ბრენდი";
+    //Variable to set starting value
+  const defaultValue = LapBrandValue? LapBrandValue : 'ლეპტოპის ბრენდი'
   return (
     <select
       className={selectClasses}
       name="laptop_brand_id"
-      defaultValue={defaultvalue}
+      value={defaultValue}
       onChange={LapBrandChangeHandler}
       onBlur={LapBrandBlurHandler}
     >
+      <option value="ლეპტოპის ბრენდი" disabled hidden>
+        ლეპტოპის ბრენდი
+      </option>
       {props.lapBrands.map((item) => (
         <OptionLapBrand key={item.id} value={item.name} />
       ))}

@@ -8,55 +8,7 @@ const Forms = () => {
   const DOMAIN =
     "https://pcfy.redberryinternship.ge/api/laptops?token=3611f593d38f29d39f136e29ea6ccce0.json";
   const navigate = useNavigate();
-  const lapBrands = [
-    {
-      id: 1,
-      name: "HP",
-    },
-    {
-      id: 2,
-      name: "Dell",
-    },
-    {
-      id: 3,
-      name: "Microsoft",
-    },
-    {
-      id: 4,
-      name: "Apple",
-    },
-    {
-      id: 5,
-      name: "Lenovo",
-    },
-    {
-      id: 6,
-      name: "Acer",
-    },
-  ];
 
-  const Cpus = [
-    {
-      id: 1,
-      name: "Intel Core i3",
-    },
-    {
-      id: 2,
-      name: "Intel Core i5",
-    },
-    {
-      id: 3,
-      name: "Intel Core i7",
-    },
-    {
-      id: 4,
-      name: "Intel Core i9",
-    },
-    {
-      id: 5,
-      name: "AMD Ryzen 3",
-    },
-  ];
   const [values, setValues] = useState({
     name: "",
     surname: "",
@@ -78,11 +30,11 @@ const Forms = () => {
     laptop_price: "",
   });
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (Object.values(values).every((x) => x)) {
-      navigate("/added");
+      console.log(values);
     }
-  }, [values, navigate]); */
+  }, [values /* navigate */]);
 
   useEffect(() => {
     const storedValues = localStorage.getItem("allValues");
@@ -108,19 +60,24 @@ const Forms = () => {
     [setValues]
   );
 
-  /*   const ait = async () => {
-    await fetch(
-      "https://pcfy.redberryinternship.ge/api/laptops?token=3611f593d38f29d39f136e29ea6ccce0.",
-      {
+  const handleSubmit = async (url, data) => {
+    try {
+      const requestOptions = {
         method: "POST",
-        body: JSON.stringify({
-          name: values.name,
-          surname: values.surname,
-        }),
-        headers: { "content-Type": "application/json" },
-      }
-    );
-  }; */
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+      /* const response =  */ await fetch(url, requestOptions);
+      //const igi = await response.json()
+      // save data to state
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const ait = () => {
+    handleSubmit(DOMAIN, values);
+  };
+
   return (
     <FormLayout>
       <Routes>
@@ -131,16 +88,10 @@ const Forms = () => {
         />
         <Route
           path="laptopForm"
-          element={
-            <LaptopForm
-              lapBrands={lapBrands}
-              Cpus={Cpus}
-              onTakeData={onTakeData}
-            />
-          }
+          element={<LaptopForm onTakeData={onTakeData} />}
         />
       </Routes>
-      <button /* onClick={ait} */>ait</button>
+      <button onClick={ait}>ait</button>
     </FormLayout>
   );
 };
