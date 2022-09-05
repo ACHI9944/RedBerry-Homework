@@ -4,9 +4,9 @@ import FormLayout from "../formLayout/FormLayout";
 import LaptopForm from "./laptopForm/LaptopForm";
 import PersonForm from "./personForm/PersonForm";
 
-
 //Functioon for fetching all data
 const lapCreateUrl = "https://pcfy.redberryinternship.ge/api/laptop/create";
+
 const handleSubmit = async (url, data) => {
   try {
     const formData = new FormData();
@@ -20,15 +20,17 @@ const handleSubmit = async (url, data) => {
 
     const response = await fetch(url, requestOptions);
     const jsonData = await response.json();
+    console.log(jsonData)
     
-    console.log(jsonData);
+    
   } catch (error) {
-    console.log('Something Went Wrong')
+    console.log("Something Went Wrong");
   }
+  return {dataisset: 'asd'}
 };
 
 const Forms = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //All inputs gathered in one object
   const [values, setValues] = useState({
@@ -51,13 +53,22 @@ const Forms = (props) => {
     laptop_purchase_date: "",
     laptop_price: "",
   });
+  console.log(values);
 
   //uploading all data
+const navigateToCompleted = () => {
+  navigate('/added')
+  localStorage.clear();
+}
+  
+
   const fetchAll = () => {
-    handleSubmit(lapCreateUrl, values)
-    navigate("/added"); 
-    localStorage.clear()
-  }
+    handleSubmit(lapCreateUrl, values);
+    navigateToCompleted()
+  
+  };
+
+
 
   //Using local storage not to lose data on refreshing
   useEffect(() => {
@@ -72,23 +83,20 @@ const Forms = (props) => {
     localStorage.setItem("allValues", JSON.stringify(values));
   }, [values]);
 
-
   //bringing data from both: Laptopform, Personform, also deactivating button while merging
   const [isReadyForSubmit, setIsReadyForSubmit] = useState(true);
   const onTakeData = useCallback(
     (broughtValue) => {
-      setIsReadyForSubmit(false)
+      setIsReadyForSubmit(false);
       for (const key in broughtValue) {
         setValues((previousValues) => ({
           ...previousValues,
           [key]: broughtValue[key].inputValue,
         }));
       }
-      setIsReadyForSubmit(true)
+      setIsReadyForSubmit(true);
     },
     [setValues]
-
-
   );
 
   return (
