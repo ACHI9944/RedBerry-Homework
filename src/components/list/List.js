@@ -30,7 +30,7 @@ const List = (props) => {
     fetchData();
   }, [url]);
 
-  console.log(data)
+
   return (
     <Fragment>
       {isLoading && <LoadingSpinner />}
