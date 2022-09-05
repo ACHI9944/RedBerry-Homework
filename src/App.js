@@ -6,7 +6,7 @@ import List from '../src/components/list/List'
 import Completed from "./components/completed/Completed";
 
 //Main token that can be changed everywhere from here
-const token = '040540e4438872d0ce8aaf81b9c931eb'
+const token = '0180e86df24aa6ed885ddff561d53d63'
 function App() {
 
  

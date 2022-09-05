@@ -4,17 +4,9 @@ import classes from "./DateInput.module.css";
 
 //function for Checking input validity
 const isNotEmpty = (value) => value.trim().length > 0;
-const isNumber = (value) => {
-  const regex = /[^0-9 /.]/g;
-  const NotNumber = value.trim().match(regex);
-  if (NotNumber) {
-    return false;
-  } else {
-    return true;
-  }
-};
+
 const isValueValid = (value) => {
-  if (isNotEmpty(value) && isNumber(value)) {
+  if (isNotEmpty(value)) {
     return true;
   } else {
     return false;
