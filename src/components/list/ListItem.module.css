@@ -1,13 +1,16 @@
 .layer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
   display: flex;
+  left: 0;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
   background-color: #ffffff;
 }
 .maindiv {
-  width: 60%;
+  width: 70%;
   margin: 0;
   display: flex;
   justify-content: space-between;
@@ -35,7 +38,7 @@
 }
 
 .layer img {
-  max-width: 280px;
+  width: 100%;
   height: auto;
 }
 
@@ -62,4 +65,49 @@
 .description p {
   font-size: 0.65rem;
   color: #797979;
+}
+
+.button {
+  position: fixed;
+  top: 33px;
+  left: 55px;
+  cursor: pointer;
+  
+}
+
+.button ion-icon {
+  
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  font-size: 30px;
+  padding: 8px;
+}
+
+@media (max-width: 390px) {
+  .layer {
+    width: 100%;
+    background-color: #ffffff;
+  }
+
+  .layer img {
+    width: 100%;
+  }
+  .button {
+    background: none;
+    top: 5px;
+    left: 5px;
+  }
+
+  .button ion-icon {
+    font-size: 25px;
+    color: #797979;
+  }
+  .maindiv {
+    width: 90%;
+  }
+
+  .middlediv {
+    flex-direction: column;
+  }
+  
 }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import classes from "./DateInput.module.css";
 
@@ -14,7 +14,7 @@ const isNumber = (value) => {
   }
 };
 const isValueValid = (value) => {
-  if (isNotEmpty(value) && isNumber(value)) {
+  if (isNotEmpty(value)) {
     return true;
   } else {
     return false;
@@ -44,7 +44,7 @@ const DateInput = (props) => {
     localStorage.setItem("date", JSON.stringify(dateValue));
   }, [dateValue]);
 
-  //Function to take data to the parent component, including functions to blur and 
+  //Function to take data to the parent component, including functions to blur and
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -55,22 +55,22 @@ const DateInput = (props) => {
         blur: dateBlurHandler,
       },
     });
-  }, [
-    onTakeData,
-    dateValue,
-    dateHasError,
-    dateIsTouched,
-    dateBlurHandler,
-  ]);
+  }, [onTakeData, dateValue, dateHasError, dateIsTouched, dateBlurHandler]);
 
   //Variable to change  input classes depending on value validity.
   const dateClasses = dateHasError ? classes.invalidDate : classes.date;
+
+  const [dateType, setDateType] = useState("text");
+  const changeType = () => {
+    setDateType("date");
+  };
 
   return (
     <div className={dateClasses}>
       <label>შეძენის რიცხვი(არჩევითი)</label>
       <input
-        type="text"
+        onFocus={changeType}
+        type={dateType}
         name="date"
         placeholder="დდ / თთ / წწწწ"
         value={dateValue}

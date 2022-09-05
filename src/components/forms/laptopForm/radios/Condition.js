@@ -51,22 +51,22 @@ const Condition = (props) => {
     });
   }, [conditionvalue, onTakeData, alert, valueIsValid]);
 
-
   // Function for getting checked value not to lose checked after refreshing
   const checkChecker = (value) => {
     let checkedNew = false;
     let checkedUsed = false;
-    if (value === "ახალი") {
+    if (value === "new") {
       checkedNew = true;
       checkedUsed = false;
-    } else if (value === "მეორადი") {
+    } else if (value === "used") {
       checkedUsed = true;
       checkedNew = false;
     }
     return { checkedNew, checkedUsed };
   };
 
-  const {checkedNew , checkedUsed} = checkChecker(conditionvalue)
+  const { checkedNew, checkedUsed } = checkChecker(conditionvalue);
+
   return (
     <div className={conditionClass}>
       <p>ლეპტოპის მდგომარეობა</p>
@@ -74,7 +74,7 @@ const Condition = (props) => {
         <input
           type="radio"
           name="condition"
-          value="ახალი"
+          value="new"
           onChange={handleChange}
           checked={checkedNew}
         />
@@ -82,7 +82,7 @@ const Condition = (props) => {
         <input
           type="radio"
           name="condition"
-          value="მეორადი"
+          value="used"
           onChange={handleChange}
           checked={checkedUsed}
         />

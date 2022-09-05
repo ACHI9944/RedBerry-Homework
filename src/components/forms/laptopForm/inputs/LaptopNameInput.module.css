@@ -51,3 +51,16 @@
 .laptopinvalidname input:active {
   outline: none;
 }
+
+
+@media (max-width: 390px) {
+  .laptopname,
+  .laptopinvalidname {
+    width: 100%;
+  }
+  .laptopname input,
+  .laptopinvalidname input {
+    font-size: 1rem;
+    height: 50px;
+  }
+}

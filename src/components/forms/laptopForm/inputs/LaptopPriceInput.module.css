@@ -53,3 +53,16 @@
 .invalidLaptopPrice input:active {
   outline: none;
 }
+
+
+@media (max-width: 390px) {
+  .LaptopPrice,
+.invalidLaptopPrice {
+    width: 100%;
+  }
+  .LaptopPrice input,
+  .invalidLaptopPrice input {
+    font-size: 1rem;
+    height: 50px;
+  }
+}

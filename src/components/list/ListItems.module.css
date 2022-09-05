@@ -34,4 +34,20 @@
   cursor: pointer;
   color: #4386a9;
   text-decoration-line: underline;
+
+}
+
+@media (max-width: 390px) {
+  .listItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .description {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  
 }

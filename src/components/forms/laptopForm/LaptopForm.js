@@ -19,15 +19,18 @@ import useFetchDummy from "../../hooks/useFetchDummy";
 const lapBrandsUrl = "https://pcfy.redberryinternship.ge/api/brands";
 const cpusUrl = "https://pcfy.redberryinternship.ge/api/cpus";
 
+
 const LaptopForm = (props) => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate("/add/personform");
   };
-
   const backToPersonForm = () => {
     navigate("/add/personform");
   };
+
+  //destructuring props
+  const { onTakeData, isReady, submitToFetch } = props;
 
   //State for gathering all data from component inputs
   const [laptopValues, setlaptopValues] = useState({
@@ -51,8 +54,10 @@ const LaptopForm = (props) => {
     }));
   }, []);
 
-  //destructuring props
-  const { onTakeData,} = props;
+  //Function to take all person inputs to parent components
+  useEffect(() => {
+    onTakeData(laptopValues);
+  }, [laptopValues, onTakeData]);
 
   //function for submitting form. to check validity of every single input
   const submitDataHandler = (event) => {
@@ -70,7 +75,7 @@ const LaptopForm = (props) => {
       laptopValues.laptop_purchase_date.isvalid &&
       laptopValues.laptop_price.isvalid
     ) {
-      onTakeData(laptopValues);
+      submitToFetch()
     } else {
       laptopValues.laptop_image.blur();
       laptopValues.laptop_name.blur();
@@ -97,7 +102,13 @@ const LaptopForm = (props) => {
   }, [fetchlaptopBrandData, fetchlaptopCpuData]);
   return (
     <Fragment>
-      <Button onBack={goBack} />
+      <Button className={classes.back} onBack={goBack} />
+      <div className={classes.header}>
+        <ul>
+          <li className={classes.person}>თანამშრომლის ინფო</li>
+          <li className={classes.laptop}>ლეპტოპის მახასიათებლები</li>
+        </ul>
+      </div>
       <form className={classes.laptopForm} onSubmit={submitDataHandler}>
         <ImageInput onTakeData={mergeData} />
         <div className={classes.lapNameAndBrand}>
@@ -122,7 +133,7 @@ const LaptopForm = (props) => {
           <button className={classes.miniBackButton} onClick={backToPersonForm}>
             უკან
           </button>
-          <button className={classes.saveButton}>დამახსოვრება</button>
+          <button className={classes.saveButton} disabled={!isReady}>დამახსოვრება</button>
         </div>
       </form>
     </Fragment>

@@ -15,6 +15,8 @@ const teamsUrl = "https://pcfy.redberryinternship.ge/api/teams";
 const positionsUrl = "https://pcfy.redberryinternship.ge/api/positions";
 
 const PersonForm = (props) => {
+  const { onTakeData } = props;
+
   const navigate = useNavigate();
 
   //function on button for going back to main
@@ -33,7 +35,6 @@ const PersonForm = (props) => {
     phone_number: "",
   });
 
-
   //function for merging incoming data to existing data in state
   const mergeData = useCallback(
     (value) => {
@@ -44,7 +45,11 @@ const PersonForm = (props) => {
     },
     [setPersonValues]
   );
-  const { onTakeData } = props;
+
+  //Function to take all person inputs to parent components
+  useEffect(() => {
+    onTakeData(personValues);
+  }, [personValues, onTakeData]);
 
   //function for submitting form. to check validity of every single input
   const submitDataHandler = (event) => {
@@ -57,7 +62,6 @@ const PersonForm = (props) => {
       personValues.email.isvalid &&
       personValues.phone_number.isvalid
     ) {
-      onTakeData(personValues);
       navigate("/add/laptopForm");
     } else {
       personValues.name.blur();
@@ -83,10 +87,15 @@ const PersonForm = (props) => {
   };
   const positionsData = positionChangeHandler(personValues.team_id.inputValue);
 
-  
   return (
     <Fragment>
-      <Button onBack={goBack} />
+      <Button className={classes.backButton} onBack={goBack} />
+      <div className={classes.header}>
+        <ul>
+          <li className={classes.person}>თანამშრომლის ინფო</li>
+          <li className={classes.laptop}>ლეპტოპის მახასიათებლები</li>
+        </ul>
+      </div>
       <form className={classes.personform} onSubmit={submitDataHandler}>
         <div className={classes.fullname}>
           <FirstNameInput onTakeData={mergeData} />

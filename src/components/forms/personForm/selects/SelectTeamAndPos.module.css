@@ -25,3 +25,16 @@
   background-color: #ffffff;
   border: none;
 }
+
+@media (max-width: 390px) {
+  .select,
+  .invalidSelect{
+    font-size: 1rem;
+    width: 90%;
+    height: 50px;
+  }
+  .select option {
+    font-size: 10px;
+  }
+  
+}

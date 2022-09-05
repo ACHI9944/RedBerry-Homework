@@ -1,9 +1,40 @@
+.header {
+  width: 100%;
+  margin: 0 auto 0 auto;
+}
+
+.header ul {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0rem auto;
+}
+
+.header li {
+  margin: 0.8rem 1rem 0.8rem 1rem;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.person {
+  padding-bottom: 5px;
+}
+.laptop {
+  border-bottom: black solid 2px;
+  padding-bottom: 5px;
+}
+
 .laptopForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 100%;
+  background-color: #ffffff;
+  border-radius: 18px;
 }
 .lapNameAndBrand {
   display: flex;
@@ -11,8 +42,8 @@
   justify-content: space-between;
   width: 80%;
   align-items: center;
-  border-bottom: 1px solid #C7C7C7;
-  margin: 0.5rem 0 0.5rem 0 ;
+  border-bottom: 1px solid #c7c7c7;
+  margin: 0.5rem 0 0.5rem 0;
   padding-bottom: 1rem;
 }
 
@@ -22,7 +53,7 @@
   justify-content: space-between;
   width: 80%;
   align-items: center;
-  margin: 0.5rem 0 0.5rem 0 ;
+  margin: 0.5rem 0 0.5rem 0;
 }
 .ramAndType {
   display: flex;
@@ -30,7 +61,7 @@
   justify-content: space-between;
   width: 80%;
   align-items: center;
-  border-bottom: 1px solid #C7C7C7;
+  border-bottom: 1px solid #c7c7c7;
   margin: 0.5rem 0;
 }
 .dateAndPrice {
@@ -39,7 +70,7 @@
   justify-content: space-between;
   width: 80%;
   align-items: center;
-  margin: 0.5rem 0 ;
+  margin: 0.5rem 0;
 }
 
 .lowerButtons {
@@ -53,7 +84,7 @@
   border: none;
   color: #62a1eb;
   cursor: pointer;
-  margin: 0.5rem 0 ;
+  margin: 0.5rem 0;
 }
 
 .saveButton {
@@ -64,6 +95,70 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin: 0.5rem 0 ;
+  margin: 0.5rem 0;
+}
+.saveButton:disabled {
+  background-color: black;
+  cursor: not-allowed;
 }
 
+@media (min-width: 391px) {
+  .header p {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .back {
+    background: none;
+    top: 5px;
+    left: 5px;
+  }
+
+  .back ion-icon {
+    font-size: 25px;
+    color: #797979;
+  }
+
+  .saveButton,
+  .miniBackButton {
+    margin-bottom: 1.5rem;
+  }
+  .header {
+    width: 100%;
+  }
+
+  .header ul {
+    align-items: center;
+    flex-direction: column;
+  }
+  .laptopForm {
+    border-radius: 12px 12px 0px 0px;
+  }
+
+  .person {
+    display: none;
+  }
+  .laptop {
+    border: none;
+  }
+  .lapNameAndBrand {
+    flex-direction: column;
+    border: none;
+    width: 90%;
+  }
+  .aboutCpu {
+    flex-direction: column;
+    width: 90%;
+  }
+  .ramAndType {
+    align-items: flex-start;
+    flex-direction: column;
+    border: none;
+    width: 90%;
+  }
+  .dateAndPrice {
+    flex-direction: column;
+    width: 90%;
+  }
+}

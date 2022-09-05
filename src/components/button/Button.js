@@ -3,7 +3,7 @@ const icon = <ion-icon name="chevron-back-outline"></ion-icon>;
 
 const Button = (props) => {
   return (
-    <button onClick={props.onBack} className={classes.button}>
+    <button onClick={props.onBack} className={`${classes.button} ${props.className}`}>
       {icon}
     </button>
   );

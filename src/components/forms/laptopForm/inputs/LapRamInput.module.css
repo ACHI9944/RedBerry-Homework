@@ -53,3 +53,15 @@
 .invalidLapRam input:active {
   outline: none;
 }
+
+@media (max-width: 390px) {
+  .LapRam,
+.invalidLapRam {
+    width: 100%;
+  }
+  .LapRam input,
+  .invalidLapRam input {
+    font-size: 1rem;
+    height: 50px;
+  }
+}

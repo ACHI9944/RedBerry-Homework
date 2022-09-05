@@ -46,3 +46,15 @@
 .invalidDate input:active {
   outline: none;
 }
+
+@media (max-width: 390px) {
+  .date,
+.invalidDate {
+    width: 100%;
+  }
+  .date input,
+  .invalidDate input {
+    font-size: 1rem;
+    height: 50px;
+  }
+}

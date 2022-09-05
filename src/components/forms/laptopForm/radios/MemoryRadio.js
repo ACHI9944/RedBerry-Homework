@@ -40,6 +40,7 @@ const MemoryRadio = (props) => {
     localStorage.setItem("memoryType", JSON.stringify(memoryValue));
   }, [memoryValue]);
 
+
   //Function to take data to the parent component, including functions to blur
   const { onTakeData } = props;
   useEffect(() => {
@@ -53,14 +54,16 @@ const MemoryRadio = (props) => {
     });
   }, [memoryValue, onTakeData, valueIsValid, alert]);
 
+
   // Function for getting checked value not to lose checked after refreshing
   const checkChecker = (value) => {
+
     let checkedSsd = false;
     let checkedHdd = false;
-    if (value === "ssd") {
+    if (value === "SSD") {
       checkedSsd = true;
       checkedHdd = false;
-    } else if (value === "hdd") {
+    } else if (value === "HDD") {
       checkedHdd = true;
       checkedSsd = false;
     }
@@ -76,7 +79,7 @@ const MemoryRadio = (props) => {
         <input
           type="radio"
           name="memory"
-          value="ssd"
+          value="SSD"
           onChange={handleChange}
           checked={checkedSsd}
         />
@@ -84,7 +87,7 @@ const MemoryRadio = (props) => {
         <input
           type="radio"
           name="memory"
-          value="hdd"
+          value="HDD"
           onChange={handleChange}
           checked={checkedHdd}
         />

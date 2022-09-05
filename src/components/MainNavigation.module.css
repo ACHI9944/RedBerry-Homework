@@ -9,7 +9,7 @@
 }
 
 .header {
-  margin: 0rem auto 3rem auto;
+  margin: 1.2rem auto 2.5rem auto;
   text-align: center;
   align-items: center;
   font-size: 1.3rem;
@@ -18,16 +18,10 @@
   width: 112px;
   height: auto;
 }
-.logoimg {
-  margin: 0rem auto 3rem auto;
+.logoImg {
+  margin: 0rem auto 0rem auto;
   align-items: center;
   text-align: center;
-}
-
-.logoimg img {
-  align-items: center;
-  text-align: center;
-  border: none;
 }
 
 .nav {
@@ -42,7 +36,7 @@
 }
 .nav li {
   margin: 1rem auto;
-  width: 15rem;
+  width: 14rem;
   background-color: #62a1eb;
   border: none;
   border-radius: 8px;
@@ -61,4 +55,30 @@
 .nav a:active,
 .nav a.active {
   color: #e6fcfc;
+}
+/* Media Query */
+@media (min-width:391px) {
+  .logoImgMob {
+    display: none;
+  }
+}
+
+@media (max-width:390px){
+  .logoImg {
+    display: none;
+  }
+  .logoImgMob {
+    width: 90%;
+    margin-bottom: 2rem;
+    
+  }
+  .nav li {
+    width: 18rem;
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 1rem auto;
+  }
+
 }

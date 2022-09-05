@@ -15,9 +15,10 @@ const isNotEmpty = (value) => {
 
 const ImageInput = (props) => {
   const [img, setImg] = useState("");
-  const imageChangeHandler = (event) => {
+  const imageChangeHandler = async (event) => {
     setImg(event.target.files[0]);
   };
+
   // variable to controll if user checked input or not
   const isvalid = isNotEmpty(img);
 
@@ -25,14 +26,11 @@ const ImageInput = (props) => {
   const inavlidClass = classes.invalidImage;
   const validClass = classes.image;
   const [imgClass, setImgClass] = useState(validClass);
-  const alertImg = useCallback(
-    (event) => {
-      setImgClass(inavlidClass);
-    },
-    [inavlidClass]
-  );
- 
-  //Function to take data to the parent component, including functions to blur and 
+  const alertImg = useCallback(() => {
+    setImgClass(inavlidClass);
+  }, [inavlidClass]);
+
+  //Function to take data to the parent component, including functions to blur and
   const { onTakeData } = props;
   useEffect(() => {
     onTakeData({
@@ -54,7 +52,7 @@ const ImageInput = (props) => {
       <input id="file-upload" type="file" onChange={imageChangeHandler}></input>
     </div>
   );
-  
+
   return (
     <Fragment>
       {!img && beforeUploadImg}

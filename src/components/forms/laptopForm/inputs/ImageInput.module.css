@@ -141,3 +141,19 @@
   color: white;
   margin: 1rem 0;
 }
+
+@media (max-width: 390px) {
+  .image,
+  .invalidImage {
+    width: 90%;
+    height: 150%;
+  }
+  .uploadedDiv {
+    width: 90%;
+  }
+  .number input,
+  .invalidNumber input {
+    font-size: 1rem;
+    height: 50px;
+  }
+}

@@ -37,12 +37,12 @@
 
 .number p {
   margin: 0.1rem 0 0.5rem 0;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   color: #000000;
 }
 .invalidNumber p {
   margin: 0.1rem 0 0.5rem 0;
-  font-size: 0.7rem;
+  font-size: 0.5rem;
   color: #e52f2f;
 }
 
@@ -51,4 +51,16 @@
 .invalidNumber input:focus,
 .invalidNumber input:active {
   outline: none;
+}
+
+@media (max-width: 390px) {
+  .number,
+  .invalidNumber {
+    width: 90%;
+  }
+  .number input,
+  .invalidNumber input {
+    font-size: 1rem;
+    height: 50px;
+  }
 }

@@ -40,4 +40,26 @@
   font-weight: bold;
   background-color: #ffffff;
   margin: 1rem 0;
+  cursor: pointer;
+}
+@media (max-width: 390px) {
+  .layer {
+    width: 100%;
+    background-color: #ffffff;
+  }
+  .completed {
+    width: 100%;
+  }
+
+  .completed img{
+    width: 100%;
+  }
+  .toList {
+    font-size: 1.2rem;
+    width: 90%;
+    height: 50px;
+  }
+  .backToMain {
+    font-size: 1.2rem;
+  }
 }

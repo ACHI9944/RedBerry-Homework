@@ -51,7 +51,7 @@ const NumberInput = (props) => {
     onTakeData({
       name: "phone_number",
       value: {
-        inputValue: +numberValue,
+        inputValue: numberValue,
         isvalid: !numberHasError && numberIsTouched,
         blur: numberBlurHandler,
       },

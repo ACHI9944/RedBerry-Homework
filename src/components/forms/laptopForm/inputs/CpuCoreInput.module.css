@@ -52,3 +52,15 @@
 .invalidCpuCore input:active {
   outline: none;
 }
+
+@media (max-width: 390px) {
+  .CpuCore,
+.invalidCpuCore {
+    width: 100%;
+  }
+  .CpuCore input,
+  .invalidCpuCore input {
+    font-size: 1rem;
+    height: 50px;
+  }
+}
