@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import UseInputAndSelect from "../../../hooks/UseInputAndSelect";
 import OptionTeam from "./OptionTeam";
 import classes from "./SelectTeamAndPos.module.css";

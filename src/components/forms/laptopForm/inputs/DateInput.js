@@ -14,7 +14,7 @@ const isNumber = (value) => {
   }
 };
 const isValueValid = (value) => {
-  if (isNotEmpty(value)) {
+  if (isNotEmpty(value) && isNumber(value)) {
     return true;
   } else {
     return false;
