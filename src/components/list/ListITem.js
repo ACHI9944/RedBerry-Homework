@@ -1,5 +1,4 @@
 import classes from "./ListItem.module.css";
-import laptopimage from "../../assets/pictures/laptop3.png";
 import { Fragment, useEffect, useState } from "react";
 
 //brought dummy data for finding team and position. sorry,out of time

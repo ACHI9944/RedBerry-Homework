@@ -33,8 +33,8 @@ const List = (props) => {
   console.log(data)
   return (
     <Fragment>
-      {!isLoading && <LoadingSpinner />}
-      {isLoading &&
+      {isLoading && <LoadingSpinner />}
+      {!isLoading &&
         <div>
           <Button className={classes.back} onBack={goBack}>
             {icon}

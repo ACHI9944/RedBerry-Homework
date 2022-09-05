@@ -3,7 +3,7 @@ import ListItem from "./ListITem";
 import classes from "./ListItems.module.css";
 
 const ListItems = (props) => {
-  const { mainToken, id, img, fullname, lapName } = props;
+  const { mainToken, id,img, fullname, lapName } = props;
 
   const [isShowingInfo, setIsShowingInfo] = useState(false);
 
@@ -20,7 +20,7 @@ const ListItems = (props) => {
       {isShowingInfo && <ListItem mainToken={mainToken} id={id} onBackToList={viewLess} />}
       <li className={classes.listItem}>
         <div className={classes.image}>
-          <img src={`https://pcfy.redberryinternship.ge/${props.img}`} alt="img"></img>
+          <img src={`https://pcfy.redberryinternship.ge/${img}`} alt="img"></img>
         </div>
         <div className={classes.description}>
           <p className={classes.names}>{fullname}</p>
