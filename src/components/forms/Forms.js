@@ -1,33 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import FormLayout from "../formLayout/FormLayout";
+import { handleSubmit } from "../hooks/api";
+import usePostHttp from "../hooks/usePostHook";
 import LaptopForm from "./laptopForm/LaptopForm";
 import PersonForm from "./personForm/PersonForm";
 
-//Functioon for fetching all data
-const lapCreateUrl = "https://pcfy.redberryinternship.ge/api/laptop/create";
-
-const handleSubmit = async (url, data) => {
-  try {
-    const formData = new FormData();
-    for (const name in data) {
-      formData.append(name, data[name]);
-    }
-    const requestOptions = {
-      method: "POST",
-      body: formData,
-    };
-
-    const response = await fetch(url, requestOptions);
-    const jsonData = await response.json();
-    console.log(jsonData)
-    
-    
-  } catch (error) {
-    console.log("Something Went Wrong");
-  }
-  return {dataisset: 'asd'}
-};
 
 const Forms = (props) => {
   const navigate = useNavigate();
@@ -54,20 +32,22 @@ const Forms = (props) => {
     laptop_price: "",
   });
 
-  //uploading all data
-const navigateToCompleted = () => {
-  navigate('/added')
-  localStorage.clear();
-}
-  
+  const { sendRequest, status } = usePostHttp(handleSubmit);
 
+  //uploading all data and using custom http hook not to navigate before uploading data
+ // using useEffect to navigate only when when status is positive
   const fetchAll = () => {
-    handleSubmit(lapCreateUrl, values);
-    navigateToCompleted()
-  
+    sendRequest(values);
   };
 
-
+  useEffect(() => {
+    if (status === "completed") {
+      navigate("/added");
+    } else if (status === "error") {
+      alert("სურათი უნდა იყოს .jpg ფორმატის");
+      return;
+    }
+  },[status,navigate]);
 
   //Using local storage not to lose data on refreshing
   useEffect(() => {

@@ -8,10 +8,12 @@ const Completed = () => {
 
   const addDataToList = () => {
     navigate('/list')
+    localStorage.clear()
   };
 
   const backToMainPage = () => {
     navigate('/main')
+    localStorage.clear()
   };
 
   return (
