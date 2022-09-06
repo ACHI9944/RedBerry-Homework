@@ -53,7 +53,6 @@ const Forms = (props) => {
     laptop_purchase_date: "",
     laptop_price: "",
   });
-  console.log(values);
 
   //uploading all data
 const navigateToCompleted = () => {
