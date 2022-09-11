@@ -7,7 +7,7 @@ import Completed from "./components/completed/Completed";
 
 
 //Hosting page
-// https://redbe-c3049.web.app/main
+// https://redberry-44161.web.app/main
 
 //Main token that can be changed everywhere from here
 const token = "8c27832eb65673dcf28aa4c7ece9f294";
