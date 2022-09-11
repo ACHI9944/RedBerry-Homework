@@ -8,6 +8,7 @@
   align-items: center;
   flex-direction: column;
   background-color: #ffffff;
+  overflow: scroll
 }
 .maindiv {
   width: 70%;
@@ -101,6 +102,7 @@
   .button ion-icon {
     font-size: 25px;
     color: #797979;
+    background-color: white;
   }
   .maindiv {
     width: 90%;
@@ -111,3 +113,5 @@
   }
   
 }
+
+
