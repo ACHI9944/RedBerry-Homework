@@ -1,5 +1,6 @@
 .layer {
   position: fixed;
+  overflow: scroll;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -8,7 +9,6 @@
   align-items: center;
   flex-direction: column;
   background-color: #ffffff;
-  overflow: scroll
 }
 .maindiv {
   width: 70%;
