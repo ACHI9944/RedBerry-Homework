@@ -1,5 +1,6 @@
 import classes from "./ListItem.module.css";
 import { Fragment, useEffect, useState } from "react";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 //brought dummy data for finding team and position. sorry,out of time
 const teamData = [
@@ -117,7 +118,6 @@ const positionData = [
   },
 ];
 
-
 const ListItem = (props) => {
   const { mainToken, id, onBackToList } = props;
   const url = `https://pcfy.redberryinternship.ge/api/laptop/${id}?token=${mainToken}`;
@@ -143,7 +143,6 @@ const ListItem = (props) => {
     fetchData();
   }, [url]);
 
-
   //Functions to find set some data in states, then using useEffect not to have error while rendering
   const teamChangeHandler = (teamdata) => {
     const data = teamData.filter((item) => item.id === teamdata);
@@ -163,27 +162,33 @@ const ListItem = (props) => {
   const [filteredpos, setfilteredpos] = useState("");
   const [filteredteam, setfilteredteam] = useState("");
   const [condition, setCondition] = useState("");
-  const [imgUrl, setImgUrl] = useState('')
-  
+  const [imgUrl, setImgUrl] = useState("");
+
   useEffect(() => {
     if (!isLoading) {
       setfilteredpos(positionChangeHandler(data.user.position_id));
       setfilteredteam(teamChangeHandler(data.user.team_id));
       setCondition(conditionChangeHandler(data.laptop.state));
-      setImgUrl(data.laptop.image)
+      setImgUrl(data.laptop.image);
     }
   }, [isLoading, data]);
 
   return (
     <Fragment>
+      {isLoading && <LoadingSpinner />}
       {!isLoading && (
         <div className={classes.layer}>
-          <button className={classes.button} onClick={goBack}>{icon}</button>
+          <button className={classes.button} onClick={goBack}>
+            {icon}
+          </button>
           <h4>ლეპტოპის ინფო</h4>
           <div className={classes.maindiv}>
             <div className={`${classes.underline}  ${classes.middlediv}`}>
               <div className={classes.littlediv}>
-                <img src={`https://pcfy.redberryinternship.ge/${imgUrl}`} alt="laptop"></img>
+                <img
+                  src={`https://pcfy.redberryinternship.ge/${imgUrl}`}
+                  alt="laptop"
+                ></img>
               </div>
               <div className={classes.littlediv}>
                 <div className={classes.query}>
