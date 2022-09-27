@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import "./App.css";
 import MainNavigation from "./components/MainNavigation";
 import Forms from "./components/forms/Forms";
 import List from "../src/components/list/List";
