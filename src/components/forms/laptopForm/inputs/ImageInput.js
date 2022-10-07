@@ -15,7 +15,7 @@ const isNotEmpty = (value) => {
 
 const ImageInput = (props) => {
   const [img, setImg] = useState("");
-  const imageChangeHandler = async (event) => {
+  const imageChangeHandler =  (event) => {
     setImg(event.target.files[0]);
   };
 

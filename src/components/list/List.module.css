@@ -8,23 +8,21 @@
 }
 .layer h4 {
   margin: 1rem auto;
-  
 }
-
 
 .laptopList {
   width: 70%;
   display: flex;
   flex-wrap: wrap;
-  flex-flow: row wrap
-  
+  flex-flow: row wrap;
 }
-@media (max-width: 390px) {
-  .layer {
-    
-    
-    background-color: #ffffff;
+@media (max-width: 1000px)  {
+  .laptopList {
+    width: 100%;
   }
+}
+
+@media (max-width: 390px) {
   .back {
     background: none;
     top: 5px;
@@ -35,7 +33,6 @@
   .back ion-icon {
     font-size: 25px;
     color: #797979;
-
   }
   .laptopList {
     width: 100%;

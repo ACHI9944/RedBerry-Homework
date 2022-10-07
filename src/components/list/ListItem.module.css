@@ -84,7 +84,7 @@
   padding: 8px;
 }
 
-@media (max-width: 390px) {
+@media (max-width: 600px) {
   .layer {
     width: 100%;
     background-color: #ffffff;
